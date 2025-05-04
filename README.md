@@ -7,10 +7,10 @@
 <p  align="center"><strong>Arhamullah Kamaruddin</strong><br/>
 D0223002<br/><br/><br/><br/><br/>
 Framework Web Based<br/>2025</p>
+<br/><br/><br/><br/><br/>
 
-<hr/>
 
-<h2>📌 Role dan Fitur</h2>
+<h2>Role dan Fitur</h2>
 
 <h3>1. Admin</h3>
 <ul>
