@@ -9,50 +9,57 @@ D0223002<br/><br/><br/><br/><br/>
 Framework Web Based<br/>2025</p>
 <br/><br/><br/><br/><br/>
 
-
 <h2>Role dan Fitur</h2>
-
 <h3>1. Admin</h3>
 <ul>
-  <li>Hak Akses: Pengelola penuh</li>
+  <li>Hak Akses: Pengelola penuh, memiliki kontrol atas seluruh sistem.</li>
   <li>Fitur:
     <ul>
-      <li>Mengelola user</li>
-      <li>Mengelola semua kursus</li>
-      <li>Melihat transaksi dan statistik</li>
-      <li>Menerbitkan/mengarsipkan kursus</li>
-      <li>Mereset password</li>
-      <li>Menonaktifkan akun</li>
+      <li>Mengelola user (menambah, mengubah, menghapus student/instructor).</li>
+      <li>Melihat dan mengelola semua kursus yang dibuat oleh instructor.</li>
+      <li>Melihat transaksi pembayaran dan statistik kursus serta pengguna.</li>
+      <li>Menerbitkan atau mengarsipkan kursus.</li>
+      <li>Mereset password user.</li>
+      <li>Menonaktifkan akun.</li>
     </ul>
   </li>
 </ul>
 
 <h3>2. Student</h3>
 <ul>
-  <li>Hak Akses: Akses kursus</li>
+  <li>Hak Akses:  Pengguna yang hanya dapat mengakses kursus.</li>
   <li>Fitur:
     <ul>
-      <li>Mendaftar dan login</li>
-      <li>Melihat dan membeli kursus</li>
-      <li>Memberi rating & ulasan</li>
-      <li>Dapat menjadi instructor</li>
+      <li>Mendaftar dan login.</li>
+      <li>Melihat daftar kursus yang tersedia.</li>
+      <li>Melihat detail kursus.</li>
+      <li>Membeli kursus dan mengakses materi yang sudah dibeli.</li>
+      <li>Memberikan rating dan ulasan pada kursus.</li>
+      <li>Dapat menjadi instructor otomatis jika membuat kursus (menjadi instructor tambahan).</li>
     </ul>
   </li>
 </ul>
 
 <h3>3. Instructor</h3>
 <ul>
-  <li>Hak Akses: Pengajar kursus</li>
+  <li>Hak Akses: Pengguna yang mengajar atau membuat kursus.</li>
   <li>Fitur:
     <ul>
-      <li>Membuat, edit, hapus kursus</li>
-      <li>Kelola materi</li>
-      <li>Statistik & feedback</li>
+      <li>Membuat kursus, mengedit, dan menghapus kursus.</li>
+      <li>Menambah materi (lesson) pada kursus yang dikelola.</li>
+      <li>Melihat daftar siswa yang mengikuti kursusnya.</li>
+      <li>Melihat statistik dan feedback untuk kursusnya.</li>
+      <li>Seorang instructor juga memiliki hak sebagai student (akses untuk membeli dan mengikuti kursus lain) jika ia membuat kursus.</li>
     </ul>
   </li>
 </ul>
 
-<hr/>
+
+<h3>Konsep Role di Tabel Users:</h3>
+<ul>
+  <li>User: Pada tabel users, hanya ada dua tipe role utama: admin dan user.</li>
+  <li>Instructor: Status "instructor" diubah dari status user biasa (dengan flag is_instructor=true), sehingga tidak ada pemisahan akun antara user dan instructor.</li>
+</ul>
 
 <h2>📋 Struktur Tabel Database</h2>
 
