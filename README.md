@@ -1,7 +1,7 @@
 <h3  align="center">OnCourse - Sistem Manajemen Kursus Online</h3>
 
 <p align="center">
-<img src="https://upload.wikimedia.org/wikipedia/id/4/47/Universitas_Sulawesi_Barat.jpg">
+<img src="Logo Unsulbar 1.png">
 </p>
 
 
