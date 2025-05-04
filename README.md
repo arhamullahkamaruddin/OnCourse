@@ -239,7 +239,7 @@ Framework Web Based<br/>2025</p>
 <br/><br/><br/><br/><br/>
 
 <h2>Jenis Relasi dan Tabel yang Berelasi</h2>
-<h3>Relasi antara users dan courses (1-to-many)</h3>
+<h3>1. Relasi antara users dan courses (1-to-many)</h3>
 <ul>
   <li>Jenis Relasi: One-to-many (1-to-many)</li>
     <li>Tabel yang Berelasi: users (instruktur) ↔ courses</li>
@@ -249,4 +249,173 @@ Framework Web Based<br/>2025</p>
     </ul>
   </li>
 </ul>
+
+<h3>2. Relasi antara courses dan lessons (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: courses ↔ lessons</li>
+  <li>Penjelasan: Sebuah kursus bisa memiliki banyak materi (lesson). Setiap materi tersebut terkait dengan satu kursus tertentu.
+    <ul>
+      <li>Kunci: course_id di tabel lessons mengacu pada id di tabel courses.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>3. Relasi antara users dan discussions (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: users ↔ discussions</li>
+  <li>Penjelasan: Setiap pengguna (baik student maupun instruktur) dapat memulai beberapa diskusi di setiap kursus. Relasi ini menghubungkan setiap pengguna dengan diskusi yang mereka buat.
+    <ul>
+      <li>Kunci: user_id di tabel discussions mengacu pada id di tabel users.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>4. Relasi antara courses dan discussions (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: courses ↔ discussions</li>
+  <li>Penjelasan: Setiap kursus dapat memiliki banyak diskusi. Ini memungkinkan setiap kursus memiliki diskusi yang relevan bagi para peserta kursus.
+    <ul>
+      <li>Kunci: course_id di tabel discussions mengacu pada id di tabel courses.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>5. Relasi antara users dan quizzes (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: users ↔ quizzes</li>
+  <li>Penjelasan: Setiap instruktur dapat membuat beberapa kuis untuk kursus yang dia buat.
+    <ul>
+      <li>Kunci: user_id (instruktur) di tabel quizzes mengacu pada id di tabel users.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>6. Relasi antara quizzes dan questions (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: quizzes ↔ questions</li>
+  <li>Penjelasan: Setiap kuis dapat memiliki banyak pertanyaan yang diberikan kepada siswa.
+    <ul>
+      <li>Kunci: quiz_id di tabel questions mengacu pada id di tabel quizzes.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>7. Relasi antara users dan student_progress (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: users ↔ student_progress</li>
+  <li>Penjelasan: Seorang student dapat memiliki banyak entri progress untuk kursus yang berbeda. Ini memungkinkan pelacakan perkembangan masing-masing student di kursus yang berbeda.
+    <ul>
+      <li>Kunci: user_id di tabel student_progress mengacu pada id di tabel users.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>8. Relasi antara courses dan student_progress (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: courses ↔ student_progress</li>
+  <li>Penjelasan: Setiap kursus dapat memiliki banyak entri progress dari siswa yang mengikuti kursus tersebut.
+    <ul>
+      <li>Kunci: course_id di tabel student_progress mengacu pada id di tabel courses.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>9. Relasi antara users dan certificates (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: users ↔ certificates</li>
+  <li>Penjelasan: Setiap student yang menyelesaikan kursus dapat menerima satu sertifikat untuk kursus tersebut.
+    <ul>
+      <li>Kunci: user_id di tabel certificates mengacu pada id di tabel users.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>10. Relasi antara courses dan certificates (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: courses ↔ certificates</li>
+  <li>Penjelasan: Setiap kursus dapat menghasilkan sertifikat untuk banyak siswa yang telah menyelesaikannya.
+    <ul>
+      <li>Kunci: course_id di tabel certificates mengacu pada id di tabel courses.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>11. Relasi antara users dan orders (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: users ↔ orders</li>
+  <li>Penjelasan: Seorang student dapat melakukan banyak pembelian (order) untuk berbagai kursus yang berbeda.
+    <ul>
+      <li>Kunci: user_id di tabel orders mengacu pada id di tabel users.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>12. Relasi antara courses dan orders (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: courses ↔ orders</li>
+  <li>Penjelasan: Setiap kursus bisa memiliki banyak pembelian (order) dari student yang berbeda.
+    <ul>
+      <li>Kunci: course_id di tabel orders mengacu pada id di tabel courses.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>13. Relasi antara orders dan transactions (1-to-1)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-one (1-to-1)</li>
+  <li>Tabel yang Berelasi: orders ↔ transactions</li>
+  <li>Penjelasan: Setiap order hanya terkait dengan satu transaksi (di mana uang akan dikirimkan ke instruktur setelah order selesai).
+    <ul>
+      <li>Kunci: order_id di tabel transactions mengacu pada id di tabel orders.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>14. Relasi antara users dan transactions (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: users ↔ transactions</li>
+  <li>Penjelasan: Seorang instruktur bisa memiliki banyak transaksi (pembayaran) dari kursus yang dia ajarkan.
+    <ul>
+      <li>Kunci: instructor_id di tabel transactions mengacu pada id di tabel users.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>15. Relasi antara orders dan disputes (1-to-1)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-one (1-to-1)</li>
+  <li>Tabel yang Berelasi: orders ↔ disputes</li>
+  <li>Penjelasan: Setiap order hanya bisa memiliki satu dispute (komplain).
+    <ul>
+      <li>Kunci: order_id di tabel disputes mengacu pada id di tabel orders.</li>
+    </ul>
+  </li>
+</ul>
+
+<h3>16. Relasi antara disputes dan dispute_files (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+  <li>Tabel yang Berelasi: disputes ↔ dispute_files</li>
+  <li>Penjelasan: Setiap dispute dapat memiliki banyak file bukti yang dilampirkan oleh student atau instruktur.
+    <ul>
+      <li>Kunci: dispute_id di tabel dispute_files mengacu pada id di tabel disputes.</li>
+    </ul>
+  </li>
+</ul>
+
+<br/><br/><br/><br/><br/>
+
+<p>Catatan: Deskripsi tabel di atas sewaktu-waktu dapat berubah</p>
 
