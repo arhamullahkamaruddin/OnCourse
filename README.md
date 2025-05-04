@@ -1,4 +1,4 @@
-<h1>OnCourse - Sistem Manajemen Kursus Online</h1>
+<h1  align="center">OnCourse - Sistem Manajemen Kursus Online</h1>
 
 <p align="center">
 <img src="https://upload.wikimedia.org/wikipedia/id/4/47/Universitas_Sulawesi_Barat.jpg">
@@ -6,9 +6,9 @@
 
 
 
-<p><strong>Arhamullah Kamaruddin</strong><br/>
+<p  align="center"><strong>Arhamullah Kamaruddin</strong><br/>
 D0223002<br/>
-Framework Web Based - 2025</p>
+Framework Web Based<br/>2025</p>
 
 <hr/>
 
