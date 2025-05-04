@@ -61,7 +61,9 @@ Framework Web Based<br/>2025</p>
   <li>Instructor: Status "instructor" diubah dari status user biasa (dengan flag is_instructor=true), sehingga tidak ada pemisahan akun antara user dan instructor.</li>
 </ul>
 
-<h2>📋 Struktur Tabel Database</h2>
+<br/><br/><br/><br/><br/><br/>
+
+<h2>Struktur Tabel Database</h2>
 
 <h3>Tabel: <code>courses</code></h3>
 <table>
@@ -84,17 +86,142 @@ Framework Web Based<br/>2025</p>
 
 <hr/>
 
-<h2>🔗 Relasi Antar Tabel</h2>
-<ol>
-  <li><strong>users</strong> ↔ <strong>courses</strong>: 1-to-many</li>
-  <li><strong>courses</strong> ↔ <strong>lessons</strong>: 1-to-many</li>
-  <li><strong>users</strong> ↔ <strong>discussions</strong>: 1-to-many</li>
-  <li><strong>courses</strong> ↔ <strong>discussions</strong>: 1-to-many</li>
-  <li><strong>quizzes</strong> ↔ <strong>questions</strong>: 1-to-many</li>
-  <li><strong>orders</strong> ↔ <strong>transactions</strong>: 1-to-1</li>
-  <li><strong>disputes</strong> ↔ <strong>dispute_files</strong>: 1-to-many</li>
-</ol>
+<h2>Relasi Antar Tabel</h2>
 
-<p>...dan lain-lain sesuai dokumentasi lengkap.</p>
+<h2>Relasi Antar Tabel</h2>
 
-<hr/>
+<table>
+  <tr><th>No</th><th>Relasi</th><th>Jenis Relasi</th><th>Tabel yang Berelasi</th><th>Penjelasan</th><th>Kunci</th></tr>
+  <tr>
+    <td>1</td>
+    <td>users ↔ courses</td>
+    <td>One-to-many</td>
+    <td>users (instruktur) → courses</td>
+    <td>Instruktur bisa membuat banyak kursus.</td>
+    <td>instructor_id → users.id</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>courses ↔ lessons</td>
+    <td>One-to-many</td>
+    <td>courses → lessons</td>
+    <td>Kursus memiliki banyak materi.</td>
+    <td>course_id → courses.id</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>users ↔ discussions</td>
+    <td>One-to-many</td>
+    <td>users → discussions</td>
+    <td>Pengguna bisa membuat banyak diskusi.</td>
+    <td>user_id → users.id</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>courses ↔ discussions</td>
+    <td>One-to-many</td>
+    <td>courses → discussions</td>
+    <td>Kursus memiliki banyak diskusi.</td>
+    <td>course_id → courses.id</td>
+  </tr>
+  <tr>
+    <td>5</td>
+    <td>users ↔ quizzes</td>
+    <td>One-to-many</td>
+    <td>users (instruktur) → quizzes</td>
+    <td>Instruktur bisa membuat banyak kuis.</td>
+    <td>user_id → users.id</td>
+  </tr>
+  <tr>
+    <td>6</td>
+    <td>quizzes ↔ questions</td>
+    <td>One-to-many</td>
+    <td>quizzes → questions</td>
+    <td>Kuis memiliki banyak pertanyaan.</td>
+    <td>quiz_id → quizzes.id</td>
+  </tr>
+  <tr>
+    <td>7</td>
+    <td>users ↔ student_progress</td>
+    <td>One-to-many</td>
+    <td>users (student) → student_progress</td>
+    <td>Student memiliki banyak progress.</td>
+    <td>user_id → users.id</td>
+  </tr>
+  <tr>
+    <td>8</td>
+    <td>courses ↔ student_progress</td>
+    <td>One-to-many</td>
+    <td>courses → student_progress</td>
+    <td>Kursus memiliki banyak progress siswa.</td>
+    <td>course_id → courses.id</td>
+  </tr>
+  <tr>
+    <td>9</td>
+    <td>users ↔ certificates</td>
+    <td>One-to-many</td>
+    <td>users (student) → certificates</td>
+    <td>Student menerima sertifikat kursus.</td>
+    <td>user_id → users.id</td>
+  </tr>
+  <tr>
+    <td>10</td>
+    <td>courses ↔ certificates</td>
+    <td>One-to-many</td>
+    <td>courses → certificates</td>
+    <td>Kursus menghasilkan banyak sertifikat.</td>
+    <td>course_id → courses.id</td>
+  </tr>
+  <tr>
+    <td>11</td>
+    <td>users ↔ orders</td>
+    <td>One-to-many</td>
+    <td>users → orders</td>
+    <td>Student melakukan banyak order.</td>
+    <td>user_id → users.id</td>
+  </tr>
+  <tr>
+    <td>12</td>
+    <td>courses ↔ orders</td>
+    <td>One-to-many</td>
+    <td>courses → orders</td>
+    <td>Kursus dibeli oleh banyak student.</td>
+    <td>course_id → courses.id</td>
+  </tr>
+  <tr>
+    <td>13</td>
+    <td>orders ↔ transactions</td>
+    <td>One-to-one</td>
+    <td>orders → transactions</td>
+    <td>Setiap order punya satu transaksi.</td>
+    <td>order_id → orders.id</td>
+  </tr>
+  <tr>
+    <td>14</td>
+    <td>users ↔ transactions</td>
+    <td>One-to-many</td>
+    <td>users (instruktur) → transactions</td>
+    <td>Instruktur menerima banyak pembayaran.</td>
+    <td>instructor_id → users.id</td>
+  </tr>
+  <tr>
+    <td>15</td>
+    <td>orders ↔ disputes</td>
+    <td>One-to-one</td>
+    <td>orders → disputes</td>
+    <td>Satu order bisa memiliki satu dispute.</td>
+    <td>order_id → orders.id</td>
+  </tr>
+  <tr>
+    <td>16</td>
+    <td>disputes ↔ dispute_files</td>
+    <td>One-to-many</td>
+    <td>disputes → dispute_files</td>
+    <td>Dispute memiliki banyak file bukti.</td>
+    <td>dispute_id → disputes.id</td>
+  </tr>
+</table>
+
+</body>
+</html>
+
