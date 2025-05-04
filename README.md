@@ -1,13 +1,11 @@
 <h3  align="center">OnCourse - Sistem Manajemen Kursus Online</h3>
-
+<br/><br/><br/><br/><br/>
 <p align="center">
 <img src="Logo Unsulbar 1.png"  width="250px" >
 </p>
-
-
-
+<br/><br/><br/><br/><br/><br/>
 <p  align="center"><strong>Arhamullah Kamaruddin</strong><br/>
-D0223002<br/>
+D0223002<br/><br/><br/><br/><br/>
 Framework Web Based<br/>2025</p>
 
 <hr/>
