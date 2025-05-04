@@ -54,7 +54,6 @@ Framework Web Based<br/>2025</p>
   </li>
 </ul>
 
-
 <h3>Konsep Role di Tabel Users:</h3>
 <ul>
   <li>User: Pada tabel users, hanya ada dua tipe role utama: admin dan user.</li>
@@ -82,146 +81,172 @@ Framework Web Based<br/>2025</p>
   </tbody>
 </table>
 
-<!-- Lanjutkan pola ini untuk tabel lainnya: lessons, quizzes, questions, student_progress, certificates, orders, transactions, disputes, dispute_files -->
-
-<hr/>
-
-<h2>Relasi Antar Tabel</h2>
-
-<h2>Relasi Antar Tabel</h2>
-
+<h3>Tabel: <code>lessons</code></h3>
 <table>
-  <tr><th>No</th><th>Relasi</th><th>Jenis Relasi</th><th>Tabel yang Berelasi</th><th>Penjelasan</th><th>Kunci</th></tr>
-  <tr>
-    <td>1</td>
-    <td>users ↔ courses</td>
-    <td>One-to-many</td>
-    <td>users (instruktur) → courses</td>
-    <td>Instruktur bisa membuat banyak kursus.</td>
-    <td>instructor_id → users.id</td>
-  </tr>
-  <tr>
-    <td>2</td>
-    <td>courses ↔ lessons</td>
-    <td>One-to-many</td>
-    <td>courses → lessons</td>
-    <td>Kursus memiliki banyak materi.</td>
-    <td>course_id → courses.id</td>
-  </tr>
-  <tr>
-    <td>3</td>
-    <td>users ↔ discussions</td>
-    <td>One-to-many</td>
-    <td>users → discussions</td>
-    <td>Pengguna bisa membuat banyak diskusi.</td>
-    <td>user_id → users.id</td>
-  </tr>
-  <tr>
-    <td>4</td>
-    <td>courses ↔ discussions</td>
-    <td>One-to-many</td>
-    <td>courses → discussions</td>
-    <td>Kursus memiliki banyak diskusi.</td>
-    <td>course_id → courses.id</td>
-  </tr>
-  <tr>
-    <td>5</td>
-    <td>users ↔ quizzes</td>
-    <td>One-to-many</td>
-    <td>users (instruktur) → quizzes</td>
-    <td>Instruktur bisa membuat banyak kuis.</td>
-    <td>user_id → users.id</td>
-  </tr>
-  <tr>
-    <td>6</td>
-    <td>quizzes ↔ questions</td>
-    <td>One-to-many</td>
-    <td>quizzes → questions</td>
-    <td>Kuis memiliki banyak pertanyaan.</td>
-    <td>quiz_id → quizzes.id</td>
-  </tr>
-  <tr>
-    <td>7</td>
-    <td>users ↔ student_progress</td>
-    <td>One-to-many</td>
-    <td>users (student) → student_progress</td>
-    <td>Student memiliki banyak progress.</td>
-    <td>user_id → users.id</td>
-  </tr>
-  <tr>
-    <td>8</td>
-    <td>courses ↔ student_progress</td>
-    <td>One-to-many</td>
-    <td>courses → student_progress</td>
-    <td>Kursus memiliki banyak progress siswa.</td>
-    <td>course_id → courses.id</td>
-  </tr>
-  <tr>
-    <td>9</td>
-    <td>users ↔ certificates</td>
-    <td>One-to-many</td>
-    <td>users (student) → certificates</td>
-    <td>Student menerima sertifikat kursus.</td>
-    <td>user_id → users.id</td>
-  </tr>
-  <tr>
-    <td>10</td>
-    <td>courses ↔ certificates</td>
-    <td>One-to-many</td>
-    <td>courses → certificates</td>
-    <td>Kursus menghasilkan banyak sertifikat.</td>
-    <td>course_id → courses.id</td>
-  </tr>
-  <tr>
-    <td>11</td>
-    <td>users ↔ orders</td>
-    <td>One-to-many</td>
-    <td>users → orders</td>
-    <td>Student melakukan banyak order.</td>
-    <td>user_id → users.id</td>
-  </tr>
-  <tr>
-    <td>12</td>
-    <td>courses ↔ orders</td>
-    <td>One-to-many</td>
-    <td>courses → orders</td>
-    <td>Kursus dibeli oleh banyak student.</td>
-    <td>course_id → courses.id</td>
-  </tr>
-  <tr>
-    <td>13</td>
-    <td>orders ↔ transactions</td>
-    <td>One-to-one</td>
-    <td>orders → transactions</td>
-    <td>Setiap order punya satu transaksi.</td>
-    <td>order_id → orders.id</td>
-  </tr>
-  <tr>
-    <td>14</td>
-    <td>users ↔ transactions</td>
-    <td>One-to-many</td>
-    <td>users (instruktur) → transactions</td>
-    <td>Instruktur menerima banyak pembayaran.</td>
-    <td>instructor_id → users.id</td>
-  </tr>
-  <tr>
-    <td>15</td>
-    <td>orders ↔ disputes</td>
-    <td>One-to-one</td>
-    <td>orders → disputes</td>
-    <td>Satu order bisa memiliki satu dispute.</td>
-    <td>order_id → orders.id</td>
-  </tr>
-  <tr>
-    <td>16</td>
-    <td>disputes ↔ dispute_files</td>
-    <td>One-to-many</td>
-    <td>disputes → dispute_files</td>
-    <td>Dispute memiliki banyak file bukti.</td>
-    <td>dispute_id → disputes.id</td>
-  </tr>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID unik materi</td></tr>
+    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang memiliki materi ini (referensi ke courses)</td></tr>
+    <tr><td>title</td><td>string</td><td>Judul materi</td></tr>
+    <tr><td>type</td><td>enum</td><td>Jenis materi: video, link (Zoom/Google Meet), teks, atau file</td></tr>
+    <tr><td>content</td><td>text</td><td>Konten materi dalam format teks (HTML)</td></tr>
+    <tr><td>file_url</td><td>string</td><td>URL file materi (video, dokumen, dsb)</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan materi</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir materi</td></tr>
+  </tbody>
 </table>
 
-</body>
-</html>
+<h3>Tabel: <code>discussions</code></h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID unik diskusi</td></tr>
+    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang memiliki diskusi ini (referensi ke courses)</td></tr>
+    <tr><td>user_id</td><td>foreignId</td><td>ID pengguna yang memulai diskusi (student atau instruktur, referensi ke users)</td></tr>
+    <tr><td>content</td><td>text</td><td>Isi diskusi</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan diskusi</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir diskusi</td></tr>
+  </tbody>
+</table>
+
+<h3>Tabel: <code>quizzes</code></h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID unik kuis</td></tr>
+    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang memiliki kuis ini (referensi ke courses)</td></tr>
+    <tr><td>title</td><td>string</td><td>Judul kuis</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan kuis</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir kuis</td></tr>
+  </tbody>
+</table>
+
+<h3>Tabel: <code>questions</code></h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID unik pertanyaan</td></tr>
+    <tr><td>quiz_id</td><td>foreignId</td><td>ID kuis yang memiliki pertanyaan ini (referensi ke quizzes)</td></tr>
+    <tr><td>question</td><td>string</td><td>Isi pertanyaan</td></tr>
+    <tr><td>choices</td><td>json</td><td>Pilihan jawaban dalam format JSON (misal: {"A": "Option 1", "B": "Option 2"})</td></tr>
+    <tr><td>correct_answer</td><td>string</td><td>Jawaban yang benar (misal: 'A')</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan pertanyaan</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir pertanyaan</td></tr>
+  </tbody>
+</table>
+
+<h3>Tabel: <code>student_progress</code></h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID unik progress student</td></tr>
+    <tr><td>user_id</td><td>foreignId</td><td>ID student yang mengikuti kursus (referensi ke users)</td></tr>
+    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang diikuti oleh student (referensi ke courses)</td></tr>
+    <tr><td>completed_lessons</td><td>integer</td><td>Jumlah materi yang sudah diselesaikan oleh student</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan progress</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir progress</td></tr>
+  </tbody>
+</table>
+
+<h3>Tabel: <code>certificates</code></h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID sertifikat</td></tr>
+    <tr><td>user_id</td><td>foreignId</td><td>ID student yang menerima sertifikat (referensi ke users)</td></tr>
+    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang diselesaikan oleh student (referensi ke courses)</td></tr>
+    <tr><td>certificate_url</td><td>string</td><td>URL sertifikat yang dihasilkan</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan sertifikat</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir sertifikat</td></tr>
+  </tbody>
+</table>
+
+<h3>Tabel: <code>orders</code></h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID unik order</td></tr>
+    <tr><td>user_id</td><td>foreignId</td><td>ID student yang membeli kursus (referensi ke users)</td></tr>
+    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang dibeli (referensi ke courses)</td></tr>
+    <tr><td>amount</td><td>decimal(10,2)</td><td>Jumlah pembayaran yang dilakukan</td></tr>
+    <tr><td>status</td><td>enum</td><td>Status order (misal: pending, paid, completed, disputed, refunded)</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan order</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir order</td></tr>
+  </tbody>
+</table>
+
+<h3>Tabel: <code>transactions</code></h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID transaksi</td></tr>
+    <tr><td>order_id</td><td>foreignId</td><td>ID order yang terkait dengan transaksi ini (referensi ke orders)</td></tr>
+    <tr><td>instructor_id</td><td>foreignId</td><td>ID instruktur yang menerima pembayaran (referensi ke users)</td></tr>
+    <tr><td>amount</td><td>decimal(10,2)</td><td>Jumlah uang yang dibayar kepada instruktur</td></tr>
+    <tr><td>status</td><td>enum</td><td>Status transaksi (misal: pending, released, held, refunded)</td></tr>
+    <tr><td>released_at</td><td>timestamp</td><td>Waktu dana dibebaskan ke instruktur</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan transaksi</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir transaksi</td></tr>
+  </tbody>
+</table>
+
+<h3>Tabel: <code>disputes</code></h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID unik dispute</td></tr>
+    <tr><td>order_id</td><td>foreignId</td><td>ID order yang terkait dengan dispute (referensi ke orders)</td></tr>
+    <tr><td>user_id</td><td>foreignId</td><td>ID pengguna yang mengajukan komplain (referensi ke users)</td></tr>
+    <tr><td>reason</td><td>text</td><td>Alasan pengajuan komplain</td></tr>
+    <tr><td>status</td><td>enum</td><td>Status dispute (misal: open, reviewing, resolved, rejected)</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan dispute</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir dispute</td></tr>
+  </tbody>
+</table>
+
+<h3>Tabel: <code>dispute_files</code></h3>
+<table>
+  <thead>
+    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>id</td><td>bigint</td><td>ID unik file bukti</td></tr>
+    <tr><td>dispute_id</td><td>foreignId</td><td>ID dispute yang terkait dengan file bukti (referensi ke disputes)</td></tr>
+    <tr><td>file_path</td><td>string</td><td>Lokasi atau URL file bukti pendukung</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu upload file bukti</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir file bukti</td></tr>
+  </tbody>
+</table>
+
+<br/><br/><br/><br/><br/>
+
+<h2>Jenis Relasi dan Tabel yang Berelasi</h2>
+<h3>Relasi antara users dan courses (1-to-many)</h3>
+<ul>
+  <li>Jenis Relasi: One-to-many (1-to-many)</li>
+    <li>Tabel yang Berelasi: users (instruktur) ↔ courses</li>
+  <li>Penjelasan: Seorang instruktur (user dengan status is_instructor = true) bisa membuat banyak kursus. Oleh karena itu, relasi antara users dan courses adalah satu ke banyak.
+    <ul>
+      <li>Kunci: instructor_id di tabel courses mengacu pada id di tabel users.</li>
+    </ul>
+  </li>
+</ul>
 
