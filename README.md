@@ -64,19 +64,20 @@ Framework Web Based<br/>2025</p>
 
 <h2>Struktur Tabel Database</h2>
 
-<h3>Tabel: <code>questions</code></h3>
+<h3>Tabel: <code>users</code></h3>
 <table>
   <thead>
     <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
   </thead>
   <tbody>
-    <tr><td>id</td><td>bigint</td><td>ID unik pertanyaan</td></tr>
-    <tr><td>quiz_id</td><td>foreignId</td><td>ID kuis yang memiliki pertanyaan ini (referensi ke quizzes)</td></tr>
-    <tr><td>question</td><td>string</td><td>Isi pertanyaan</td></tr>
-    <tr><td>choices</td><td>json</td><td>Pilihan jawaban dalam format JSON (misal: {"A": "Option 1", "B": "Option 2"})</td></tr>
-    <tr><td>correct_answer</td><td>string</td><td>Jawaban yang benar (misal: 'A')</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan pertanyaan</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir pertanyaan</td></tr>
+    <tr><td>id</td><td>bigint</td><td>ID unik pengguna</td></tr>
+    <tr><td>name</td><td>string</td><td>Nama pengguna</td></tr>
+    <tr><td>email</td><td>string</td><td>Email pengguna (unik)</td></tr>
+    <tr><td>password</td><td>string</td><td>Password terenkripsi pengguna</td></tr>
+    <tr><td>role</td><td>enum</td><td>Peran pengguna (misalnya: 'student', 'instructor', 'admin')</td></tr>
+    <tr><td>is_instructor</td><td>boolean</td><td>Menandakan apakah pengguna adalah instruktur (akan true jika sudah membuat kursus)</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan akun</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir akun</td></tr>
   </tbody>
 </table>
 
