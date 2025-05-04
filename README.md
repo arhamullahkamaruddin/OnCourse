@@ -1,7 +1,7 @@
 <h3  align="center">OnCourse - Sistem Manajemen Kursus Online</h3>
 
 <p align="center">
-<img src="Logo Unsulbar 1.png">
+<img src="Logo Unsulbar 1.png"  width="250px" >
 </p>
 
 
