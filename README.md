@@ -65,27 +65,21 @@ Framework Web Based<br/>2025</p>
 
 <h3>Tabel: <code>users</code></h3>
 <table>
-  <thead>
-    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>id</td><td>bigint</td><td>ID unik pengguna</td></tr>
-    <tr><td>name</td><td>string</td><td>Nama pengguna</td></tr>
-    <tr><td>email</td><td>string</td><td>Email pengguna (unik)</td></tr>
-    <tr><td>password</td><td>string</td><td>Password terenkripsi pengguna</td></tr>
-    <tr><td>role</td><td>enum</td><td>Peran pengguna (misalnya: 'student', 'instructor', 'admin')</td></tr>
-    <tr><td>is_instructor</td><td>boolean</td><td>Menandakan apakah pengguna adalah instruktur (akan true jika sudah membuat kursus)</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan akun</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir akun</td></tr>
-    <tr><td>name</td><td>string</td><td>Nama lengkap</td></tr>
-    <tr><td>email</td><td>string</td><td>Email unik</td></tr>
-    <tr><td>email_verified_at</td><td>timestamp</td><td>Tanggal verifikasi email</td></tr>
-    <tr><td>password</td><td>string</td><td>Password terenkripsi</td></tr>
-    <tr><td>role</td><td>enum</td><td>Peran: admin, student, instructor</td></tr>
-    <tr><td>remember_token</td><td>string (nullable)</td><td>Token sesi login</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Tanggal pembuatan akun</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Tanggal pembaruan akun</td></tr>
-  </tbody>
+    <thead>
+        <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
+    </thead> 
+    <tbody> 
+        <tr><td>id</td><td>bigint</td><td>ID unik pengguna</td></tr> 
+        <tr><td>name</td><td>string</td><td>Nama lengkap pengguna</td></tr> 
+        <tr><td>email</td><td>string</td><td>Email unik pengguna</td></tr> 
+        <tr><td>email_verified_at</td><td>timestamp (nullable)</td><td>Tanggal verifikasi email</td></tr> 
+        <tr><td>password</td><td>string</td><td>Password terenkripsi pengguna</td></tr> 
+        <tr><td>role</td><td>enum</td><td>Peran pengguna: <code>admin</code>, <code>student</code>, atau <code>instructor</code></td></tr> 
+        <tr><td>is_instructor</td><td>boolean</td><td>True jika pengguna pernah membuat kursus (otomatis jadi instruktur)</td></tr> 
+        <tr><td>remember_token</td><td>string (nullable)</td><td>Token untuk sesi login "remember me"</td></tr> 
+        <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan akun</td></tr> 
+        <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan akun terakhir</td></tr> 
+    </tbody>
 </table>
 
 <h3>Tabel: <code>courses</code></h3>
