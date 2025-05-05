@@ -1,3 +1,4 @@
+<br/><br/><br/><br/><br/>
 <h3  align="center">OnCourse - Sistem Manajemen Kursus Online</h3>
 <br/><br/><br/><br/><br/>
 <p align="center">
@@ -188,7 +189,7 @@ Framework Web Based<br/>2025</p>
 <ul>
   <li>Jenis Relasi: One-to-many (1-to-many)</li>
     <li>Tabel yang Berelasi: users (instruktur) ↔ courses</li>
-  <li>Penjelasan: Seorang instruktur (user dengan status is_instructor = true) bisa membuat banyak kursus. Oleh karena itu, relasi antara users dan courses adalah satu ke banyak.
+  <li>Penjelasan: Seorang instruktur bisa membuat banyak kursus. Oleh karena itu, relasi antara users dan courses adalah satu ke banyak.
     <ul>
       <li>Kunci: instructor_id di tabel courses mengacu pada id di tabel users.</li>
     </ul>
