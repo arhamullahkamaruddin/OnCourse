@@ -206,7 +206,7 @@ Framework Web Based<br/>2025</p>
   </li>
 </ul>
 
-<h3>11. Relasi antara users dan orders (1-to-many)</h3>
+<h3>3. Relasi antara users dan orders (1-to-many)</h3>
 <ul>
   <li>Jenis Relasi: One-to-many (1-to-many)</li>
   <li>Tabel yang Berelasi: users ↔ orders</li>
@@ -217,7 +217,7 @@ Framework Web Based<br/>2025</p>
   </li>
 </ul>
 
-<h3>12. Relasi antara courses dan orders (1-to-many)</h3>
+<h3>4. Relasi antara courses dan orders (1-to-many)</h3>
 <ul>
   <li>Jenis Relasi: One-to-many (1-to-many)</li>
   <li>Tabel yang Berelasi: courses ↔ orders</li>
@@ -228,7 +228,7 @@ Framework Web Based<br/>2025</p>
   </li>
 </ul>
 
-<h3>13. Relasi antara orders dan transactions (1-to-1)</h3>
+<h3>5. Relasi antara orders dan transactions (1-to-1)</h3>
 <ul>
   <li>Jenis Relasi: One-to-one (1-to-1)</li>
   <li>Tabel yang Berelasi: orders ↔ transactions</li>
@@ -239,7 +239,7 @@ Framework Web Based<br/>2025</p>
   </li>
 </ul>
 
-<h3>14. Relasi antara users dan transactions (1-to-many)</h3>
+<h3>6. Relasi antara users dan transactions (1-to-many)</h3>
 <ul>
   <li>Jenis Relasi: One-to-many (1-to-many)</li>
   <li>Tabel yang Berelasi: users ↔ transactions</li>
@@ -250,7 +250,7 @@ Framework Web Based<br/>2025</p>
   </li>
 </ul>
 
-<h3>15. Relasi antara orders dan disputes (1-to-1)</h3>
+<h3>7. Relasi antara orders dan disputes (1-to-1)</h3>
 <ul>
   <li>Jenis Relasi: One-to-one (1-to-1)</li>
   <li>Tabel yang Berelasi: orders ↔ disputes</li>
@@ -261,7 +261,7 @@ Framework Web Based<br/>2025</p>
   </li>
 </ul>
 
-<h3>16. Relasi antara disputes dan dispute_files (1-to-many)</h3>
+<h3>8. Relasi antara disputes dan dispute_files (1-to-many)</h3>
 <ul>
   <li>Jenis Relasi: One-to-many (1-to-many)</li>
   <li>Tabel yang Berelasi: disputes ↔ dispute_files</li>
