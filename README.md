@@ -10,15 +10,18 @@ Framework Web Based<br/>2025</p>
 <br/><br/><br/><br/><br/>
 
 <h2>Role dan Fitur</h2>
+
 <h3>1. Admin</h3>
 <ul>
-  <li>Hak Akses: Pengelola penuh, memiliki kontrol atas seluruh sistem.</li>
-  <li>Fitur:
+  <li><strong>Hak Akses:</strong> Pengelola penuh, memiliki kontrol atas seluruh sistem.</li>
+  <li><strong>Fitur:</strong>
     <ul>
       <li>Mengelola user (menambah, mengubah, menghapus student/instructor).</li>
       <li>Melihat dan mengelola semua kursus yang dibuat oleh instructor.</li>
-      <li>Melihat transaksi pembayaran dan statistik kursus serta pengguna.</li>
       <li>Menerbitkan atau mengarsipkan kursus.</li>
+      <li>Melihat transaksi pembayaran dan melakukan refund jika diperlukan.</li>
+      <li>Menangani dispute antara student dan instructor (menentukan hasil akhir).</li>
+      <li>Melihat laporan dan statistik seluruh sistem (kursus, transaksi, user).</li>
       <li>Mereset password user.</li>
       <li>Menonaktifkan akun.</li>
     </ul>
@@ -27,38 +30,34 @@ Framework Web Based<br/>2025</p>
 
 <h3>2. Student</h3>
 <ul>
-  <li>Hak Akses:  Pengguna yang hanya dapat mengakses kursus.</li>
-  <li>Fitur:
+  <li><strong>Hak Akses:</strong> Pengguna pembelajar, memiliki akses terbatas pada kursus dan transaksi pribadi.</li>
+  <li><strong>Fitur:</strong>
     <ul>
-      <li>Mendaftar dan login.</li>
-      <li>Melihat daftar kursus yang tersedia.</li>
-      <li>Melihat detail kursus.</li>
-      <li>Membeli kursus dan mengakses materi yang sudah dibeli.</li>
-      <li>Memberikan rating dan ulasan pada kursus.</li>
-      <li>Dapat menjadi instructor otomatis jika membuat kursus (menjadi instructor tambahan).</li>
+      <li>Mendaftar dan login ke dalam sistem.</li>
+      <li>Mencari dan melihat detail kursus yang tersedia.</li>
+      <li>Membeli kursus dan melakukan pembayaran.</li>
+      <li>Mengakses materi kursus yang telah dibeli (video, teks, file, dsb).</li>
+      <li>Memberikan rating dan ulasan setelah menyelesaikan kursus.</li>
+      <li>Mengajukan dispute jika ada masalah dengan kursus atau pembayaran.</li>
     </ul>
   </li>
 </ul>
 
 <h3>3. Instructor</h3>
 <ul>
-  <li>Hak Akses: Pengguna yang mengajar atau membuat kursus.</li>
-  <li>Fitur:
+  <li><strong>Hak Akses:</strong> Kreator konten, memiliki akses untuk membuat dan mengelola kursus.</li>
+  <li><strong>Fitur:</strong>
     <ul>
-      <li>Membuat kursus, mengedit, dan menghapus kursus.</li>
-      <li>Menambah materi (lesson) pada kursus yang dikelola.</li>
-      <li>Melihat daftar siswa yang mengikuti kursusnya.</li>
-      <li>Melihat statistik dan feedback untuk kursusnya.</li>
-      <li>Seorang instructor juga memiliki hak sebagai student (akses untuk membeli dan mengikuti kursus lain) jika ia membuat kursus.</li>
+      <li>Membuat kursus baru dan mengelola kursus yang sudah dibuat.</li>
+      <li>Menambahkan materi ke dalam kursus (video, teks, link, file).</li>
+      <li>Melihat statistik dan performa kursus.</li>
+      <li>Melihat daftar siswa yang mengikuti kursusnya dan memantau progres mereka.</li>
+      <li>Menerima pembayaran setelah kursus selesai dan disetujui oleh student.</li>
+      <li>Mengajukan dispute jika terjadi masalah dengan student atau pembayaran.</li>
     </ul>
   </li>
 </ul>
 
-<h3>Konsep Role di Tabel Users:</h3>
-<ul>
-  <li>User: Pada tabel users, hanya ada dua tipe role utama: admin dan user.</li>
-  <li>Instructor: Status "instructor" diubah dari status user biasa (dengan flag is_instructor=true), sehingga tidak ada pemisahan akun antara user dan instructor.</li>
-</ul>
 
 <br/><br/><br/><br/><br/><br/>
 
@@ -78,6 +77,14 @@ Framework Web Based<br/>2025</p>
     <tr><td>is_instructor</td><td>boolean</td><td>Menandakan apakah pengguna adalah instruktur (akan true jika sudah membuat kursus)</td></tr>
     <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan akun</td></tr>
     <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir akun</td></tr>
+    <tr><td>name</td><td>string</td><td>Nama lengkap</td></tr>
+    <tr><td>email</td><td>string</td><td>Email unik</td></tr>
+    <tr><td>email_verified_at</td><td>timestamp</td><td>Tanggal verifikasi email</td></tr>
+    <tr><td>password</td><td>string</td><td>Password terenkripsi</td></tr>
+    <tr><td>role</td><td>enum</td><td>Peran: admin, student, instructor</td></tr>
+    <tr><td>remember_token</td><td>string (nullable)</td><td>Token sesi login</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Tanggal pembuatan akun</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Tanggal pembaruan akun</td></tr>
   </tbody>
 </table>
 
@@ -88,13 +95,15 @@ Framework Web Based<br/>2025</p>
   </thead>
   <tbody>
     <tr><td>id</td><td>bigint</td><td>ID unik kursus</td></tr>
-    <tr><td>instructor_id</td><td>foreignId</td><td>Referensi ke users</td></tr>
+    <tr><td>instructor_id</td><td>foreignId</td><td>Referensi ke users.id</td></tr>
     <tr><td>title</td><td>string</td><td>Judul kursus</td></tr>
-    <tr><td>description</td><td>text</td><td>Deskripsi</td></tr>
-    <tr><td>category</td><td>enum</td><td>Kategori</td></tr>
-    <tr><td>price</td><td>decimal</td><td>Harga</td></tr>
-    <tr><td>type</td><td>enum</td><td>Jenis kursus</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Tanggal buat</td></tr>
+    <tr><td>description</td><td>text</td><td>Deskripsi lengkap</td></tr>
+    <tr><td>thumbnail</td><td>string</td><td>Path gambar thumbnail</td></tr>
+    <tr><td>category</td><td>enum</td><td>Kategori kursus</td></tr>
+    <tr><td>price</td><td>decimal(10,2)</td><td>Harga kursus</td></tr>
+    <tr><td>type</td><td>enum</td><td>Jenis kursus: video, live</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Tanggal buat kursus</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Terakhir diubah</td></tr>
   </tbody>
 </table>
 
@@ -105,88 +114,13 @@ Framework Web Based<br/>2025</p>
   </thead>
   <tbody>
     <tr><td>id</td><td>bigint</td><td>ID unik materi</td></tr>
-    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang memiliki materi ini (referensi ke courses)</td></tr>
+    <tr><td>course_id</td><td>foreignId</td><td>Referensi ke courses.id</td></tr>
     <tr><td>title</td><td>string</td><td>Judul materi</td></tr>
-    <tr><td>type</td><td>enum</td><td>Jenis materi: video, link (Zoom/Google Meet), teks, atau file</td></tr>
-    <tr><td>content</td><td>text</td><td>Konten materi dalam format teks (HTML)</td></tr>
-    <tr><td>file_url</td><td>string</td><td>URL file materi (video, dokumen, dsb)</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan materi</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir materi</td></tr>
-  </tbody>
-</table>
-
-<h3>Tabel: <code>discussions</code></h3>
-<table>
-  <thead>
-    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>id</td><td>bigint</td><td>ID unik diskusi</td></tr>
-    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang memiliki diskusi ini (referensi ke courses)</td></tr>
-    <tr><td>user_id</td><td>foreignId</td><td>ID pengguna yang memulai diskusi (student atau instruktur, referensi ke users)</td></tr>
-    <tr><td>content</td><td>text</td><td>Isi diskusi</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan diskusi</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir diskusi</td></tr>
-  </tbody>
-</table>
-
-<h3>Tabel: <code>quizzes</code></h3>
-<table>
-  <thead>
-    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>id</td><td>bigint</td><td>ID unik kuis</td></tr>
-    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang memiliki kuis ini (referensi ke courses)</td></tr>
-    <tr><td>title</td><td>string</td><td>Judul kuis</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan kuis</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir kuis</td></tr>
-  </tbody>
-</table>
-
-<h3>Tabel: <code>questions</code></h3>
-<table>
-  <thead>
-    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>id</td><td>bigint</td><td>ID unik pertanyaan</td></tr>
-    <tr><td>quiz_id</td><td>foreignId</td><td>ID kuis yang memiliki pertanyaan ini (referensi ke quizzes)</td></tr>
-    <tr><td>question</td><td>string</td><td>Isi pertanyaan</td></tr>
-    <tr><td>choices</td><td>json</td><td>Pilihan jawaban dalam format JSON (misal: {"A": "Option 1", "B": "Option 2"})</td></tr>
-    <tr><td>correct_answer</td><td>string</td><td>Jawaban yang benar (misal: 'A')</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan pertanyaan</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir pertanyaan</td></tr>
-  </tbody>
-</table>
-
-<h3>Tabel: <code>student_progress</code></h3>
-<table>
-  <thead>
-    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>id</td><td>bigint</td><td>ID unik progress student</td></tr>
-    <tr><td>user_id</td><td>foreignId</td><td>ID student yang mengikuti kursus (referensi ke users)</td></tr>
-    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang diikuti oleh student (referensi ke courses)</td></tr>
-    <tr><td>completed_lessons</td><td>integer</td><td>Jumlah materi yang sudah diselesaikan oleh student</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan progress</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir progress</td></tr>
-  </tbody>
-</table>
-
-<h3>Tabel: <code>certificates</code></h3>
-<table>
-  <thead>
-    <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
-  </thead>
-  <tbody>
-    <tr><td>id</td><td>bigint</td><td>ID sertifikat</td></tr>
-    <tr><td>user_id</td><td>foreignId</td><td>ID student yang menerima sertifikat (referensi ke users)</td></tr>
-    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang diselesaikan oleh student (referensi ke courses)</td></tr>
-    <tr><td>certificate_url</td><td>string</td><td>URL sertifikat yang dihasilkan</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan sertifikat</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir sertifikat</td></tr>
+    <tr><td>type</td><td>enum</td><td>Jenis: video, link, text, file</td></tr>
+    <tr><td>content</td><td>text (nullable)</td><td>Konten teks atau HTML</td></tr>
+    <tr><td>file_url</td><td>string (nullable)</td><td>URL file materi</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Tanggal buat</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Terakhir diubah</td></tr>
   </tbody>
 </table>
 
@@ -197,12 +131,12 @@ Framework Web Based<br/>2025</p>
   </thead>
   <tbody>
     <tr><td>id</td><td>bigint</td><td>ID unik order</td></tr>
-    <tr><td>user_id</td><td>foreignId</td><td>ID student yang membeli kursus (referensi ke users)</td></tr>
-    <tr><td>course_id</td><td>foreignId</td><td>ID kursus yang dibeli (referensi ke courses)</td></tr>
-    <tr><td>amount</td><td>decimal(10,2)</td><td>Jumlah pembayaran yang dilakukan</td></tr>
-    <tr><td>status</td><td>enum</td><td>Status order (misal: pending, paid, completed, disputed, refunded)</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan order</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir order</td></tr>
+    <tr><td>user_id</td><td>foreignId</td><td>Referensi ke student (users.id)</td></tr>
+    <tr><td>course_id</td><td>foreignId</td><td>Kursus yang dibeli</td></tr>
+    <tr><td>amount</td><td>decimal(10,2)</td><td>Jumlah dibayar</td></tr>
+    <tr><td>status</td><td>enum</td><td>pending, paid, completed, disputed, refunded</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Tanggal order</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Terakhir diubah</td></tr>
   </tbody>
 </table>
 
@@ -213,13 +147,13 @@ Framework Web Based<br/>2025</p>
   </thead>
   <tbody>
     <tr><td>id</td><td>bigint</td><td>ID transaksi</td></tr>
-    <tr><td>order_id</td><td>foreignId</td><td>ID order yang terkait dengan transaksi ini (referensi ke orders)</td></tr>
-    <tr><td>instructor_id</td><td>foreignId</td><td>ID instruktur yang menerima pembayaran (referensi ke users)</td></tr>
-    <tr><td>amount</td><td>decimal(10,2)</td><td>Jumlah uang yang dibayar kepada instruktur</td></tr>
-    <tr><td>status</td><td>enum</td><td>Status transaksi (misal: pending, released, held, refunded)</td></tr>
-    <tr><td>released_at</td><td>timestamp</td><td>Waktu dana dibebaskan ke instruktur</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan transaksi</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir transaksi</td></tr>
+    <tr><td>order_id</td><td>foreignId</td><td>Referensi ke orders.id</td></tr>
+    <tr><td>instructor_id</td><td>foreignId</td><td>Instruktur penerima</td></tr>
+    <tr><td>amount</td><td>decimal(10,2)</td><td>Jumlah dibayarkan</td></tr>
+    <tr><td>status</td><td>enum</td><td>pending, released, held, refunded</td></tr>
+    <tr><td>released_at</td><td>timestamp (nullable)</td><td>Tanggal pencairan</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Dibuat</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Diubah</td></tr>
   </tbody>
 </table>
 
@@ -229,13 +163,13 @@ Framework Web Based<br/>2025</p>
     <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
   </thead>
   <tbody>
-    <tr><td>id</td><td>bigint</td><td>ID unik dispute</td></tr>
-    <tr><td>order_id</td><td>foreignId</td><td>ID order yang terkait dengan dispute (referensi ke orders)</td></tr>
-    <tr><td>user_id</td><td>foreignId</td><td>ID pengguna yang mengajukan komplain (referensi ke users)</td></tr>
-    <tr><td>reason</td><td>text</td><td>Alasan pengajuan komplain</td></tr>
-    <tr><td>status</td><td>enum</td><td>Status dispute (misal: open, reviewing, resolved, rejected)</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu pembuatan dispute</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir dispute</td></tr>
+    <tr><td>id</td><td>bigint</td><td>ID komplain</td></tr>
+    <tr><td>order_id</td><td>foreignId</td><td>Order terkait</td></tr>
+    <tr><td>user_id</td><td>foreignId</td><td>Pengaju komplain (student)</td></tr>
+    <tr><td>reason</td><td>text</td><td>Alasan komplain</td></tr>
+    <tr><td>status</td><td>enum</td><td>open, reviewing, resolved, rejected</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Dibuat</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Diubah</td></tr>
   </tbody>
 </table>
 
@@ -245,13 +179,14 @@ Framework Web Based<br/>2025</p>
     <tr><th>Field</th><th>Tipe</th><th>Keterangan</th></tr>
   </thead>
   <tbody>
-    <tr><td>id</td><td>bigint</td><td>ID unik file bukti</td></tr>
-    <tr><td>dispute_id</td><td>foreignId</td><td>ID dispute yang terkait dengan file bukti (referensi ke disputes)</td></tr>
-    <tr><td>file_path</td><td>string</td><td>Lokasi atau URL file bukti pendukung</td></tr>
-    <tr><td>created_at</td><td>timestamp</td><td>Waktu upload file bukti</td></tr>
-    <tr><td>updated_at</td><td>timestamp</td><td>Waktu pembaruan terakhir file bukti</td></tr>
+    <tr><td>id</td><td>bigint</td><td>ID file bukti</td></tr>
+    <tr><td>dispute_id</td><td>foreignId</td><td>Referensi ke disputes.id</td></tr>
+    <tr><td>file_path</td><td>string</td><td>URL/path file bukti</td></tr>
+    <tr><td>created_at</td><td>timestamp</td><td>Diunggah</td></tr>
+    <tr><td>updated_at</td><td>timestamp</td><td>Diperbarui</td></tr>
   </tbody>
 </table>
+
 
 <br/><br/><br/><br/><br/>
 
