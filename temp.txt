@@ -1,3 +1,5 @@
+Deskripsi proyek OnCourse:
+
 Role dan Fitur
 1.  Admin
     Hak Akses: Pengelola penuh, memiliki kontrol atas seluruh sistem.
@@ -147,3 +149,13 @@ Jenis Relasi dan Tabel yang Berelasi
     -   Tabel yang Berelasi: disputes ↔ dispute_files
     -   Penjelasan: Setiap dispute dapat memiliki banyak file bukti yang dilampirkan oleh student atau instruktur.
         -   Kunci: dispute_id di tabel dispute_files mengacu pada id di tabel disputes.
+
+Hal yang harus ada dalam proyek OnCourse:
+    -   Efisiensi Layouting dengan Blade
+    -   Pengelolaan Tabel dengan Migration
+    -   Menerapkan Relation Table
+    -   Menerapkan Transaction
+    -   Penerapan Sistem Autentication
+    -   Multi Role dengan 3 Role
+    -   Menerapkan CRUD
+    -   Validation Form
