@@ -1,0 +1,149 @@
+Role dan Fitur
+1.  Admin
+    Hak Akses: Pengelola penuh, memiliki kontrol atas seluruh sistem.
+    Fitur:
+        -   Mengelola akun (menambah, mengubah, menghapus student/instructor).
+        -   Melihat dan mengelola semua kursus yang dibuat oleh instructor.
+        -   Melihat transaksi pembayaran dan melakukan refund jika diperlukan.
+        -   Menangani dispute antara student dan instructor (menentukan hasil akhir).
+
+2.  Instructor
+    Hak Akses: Kreator konten, memiliki akses untuk membuat dan mengelola kursus.
+    Fitur:
+        -   Mendaftar dan login ke dalam sistem.
+        -   Membuat kursus baru dan mengelola kursus yang sudah dibuat.
+        -   Menambahkan materi ke dalam kursus.
+        -   Melihat daftar student yang mengikuti kursusnya dan memantau progres mereka.
+        -   Menerima pembayaran setelah pembelian kursus selesai dan disetujui oleh student.
+        -   Mengajukan dispute jika terjadi masalah dengan student atau pembayaran.
+
+3.  Student
+    Hak Akses: Pengguna pembelajar, memiliki akses terbatas pada kursus dan transaksi pribadi.
+    Fitur:
+        -   Mendaftar dan login ke dalam sistem.
+        -   Mencari dan melihat detail kursus yang tersedia.
+        -   Membeli kursus dan melakukan pembayaran.
+        -   Mengakses materi kursus yang telah dibeli.
+        -   Memberikan rating dan ulasan setelah membeli kursus.
+        -   Mengajukan dispute jika ada masalah dengan kursus atau pembayaran.
+
+Struktur Tabel Database
+1.  Tabel: users
+    Field	            Tipe	                Keterangan
+    id	                bigint	                ID unik pengguna
+    name	            string	                Nama lengkap pengguna
+    email	            string	                Email unik pengguna
+    email_verified_at	timestamp (nullable)	Tanggal verifikasi email
+    password	        string	                Password terenkripsi pengguna
+    role	            enum	                Peran pengguna: admin, student, atau instructor
+    remember_token	    string (nullable)	    Token untuk sesi login "remember me"
+    created_at          timestamp	            Waktu pembuatan akun
+    updated_at          timestamp	            Waktu pembaruan akun terakhir
+
+2.  Tabel: courses
+    Field	        Tipe	        Keterangan
+    id	            bigint	        ID unik kursus
+    instructor_id	foreignId	    Referensi ke users.id
+    title	        string	        Judul kursus
+    description	    text	        Deskripsi lengkap
+    price	        decimal(10,2)	Harga kursus
+    created_at	    timestamp	    Tanggal buat kursus
+    updated_at	    timestamp	    Terakhir diubah
+
+3.  Tabel: lessons
+    Field	    Tipe	            Keterangan
+    id	        bigint	            ID unik materi
+    course_id	foreignId	        Referensi ke courses.id
+    title	    string	            Judul materi
+    content	    text (nullable)	    Konten teks atau HTML
+    file_url	string (nullable)	URL file materi
+    created_at	timestamp	        Tanggal buat
+    updated_at	timestamp	        Terakhir diubah
+
+4.  Tabel: orders
+    Field	    Tipe	        Keterangan
+    id	        bigint	        ID unik order
+    user_id	    foreignId	    Referensi ke student (users.id)
+    course_id	foreignId	    Kursus yang dibeli
+    amount	    decimal(10,2)	Jumlah dibayar
+    status	    enum	        pending, paid, completed, disputed, refunded
+    created_at	timestamp	    Tanggal order
+    updated_at	timestamp	    Terakhir diubah
+
+5.  Tabel: transactions
+    Field	        Tipe	                Keterangan
+    id	            bigint	                ID transaksi
+    order_id	    foreignId	            Referensi ke orders.id
+    instructor_id	foreignId	            Instruktur penerima
+    amount	        decimal(10,2)	        Jumlah dibayarkan
+    status	        enum	                pending, released, held, refunded
+    released_at	    timestamp (nullable)	Tanggal pencairan
+    created_at	    timestamp	            Dibuat
+    updated_at	    timestamp	            Diubah
+
+6.  Tabel: disputes
+    Field	    Tipe	    Keterangan
+    id	        bigint	    ID komplain
+    order_id	foreignId	Order terkait
+    user_id	    foreignId	Pengaju komplain (student)
+    reason	    text	    Alasan komplain
+    status	    enum	    open, reviewing, resolved, rejected
+    created_at	timestamp	Dibuat
+    updated_at	timestamp	Diubah
+
+7.  Tabel: dispute_files
+    Field	    Tipe	    Keterangan
+    id	        bigint	    ID file bukti
+    dispute_id	foreignId	Referensi ke disputes.id
+    file_path	string	    URL/path file bukti
+    created_at	timestamp	Diunggah
+    updated_at	timestamp	Diperbarui
+
+Jenis Relasi dan Tabel yang Berelasi
+1. Relasi antara users dan courses (1-to-many)
+    -   Jenis Relasi: One-to-many (1-to-many)
+    -   Tabel yang Berelasi: users (instruktur) ↔ courses
+    -   Penjelasan: Seorang instruktur bisa membuat banyak kursus. Oleh karena itu, relasi antara users dan courses adalah satu ke banyak.
+        -   Kunci: instructor_id di tabel courses mengacu pada id di tabel users.
+
+2. Relasi antara courses dan lessons (1-to-many)
+    -   Jenis Relasi: One-to-many (1-to-many)
+    -   Tabel yang Berelasi: courses ↔ lessons
+    -   Penjelasan: Sebuah kursus bisa memiliki banyak materi (lesson). Setiap materi tersebut terkait dengan satu kursus tertentu.
+        -   Kunci: course_id di tabel lessons mengacu pada id di tabel courses.
+
+3. Relasi antara users dan orders (1-to-many)
+    -   Jenis Relasi: One-to-many (1-to-many)
+    -   Tabel yang Berelasi: users ↔ orders
+    -   Penjelasan: Seorang student dapat melakukan banyak pembelian (order) untuk berbagai kursus yang berbeda.
+        -   Kunci: user_id di tabel orders mengacu pada id di tabel users.
+
+4. Relasi antara courses dan orders (1-to-many)
+    -   Jenis Relasi: One-to-many (1-to-many)
+    -   Tabel yang Berelasi: courses ↔ orders
+    -   Penjelasan: Setiap kursus bisa memiliki banyak pembelian (order) dari student yang berbeda.
+        -   Kunci: course_id di tabel orders mengacu pada id di tabel courses.
+
+5. Relasi antara orders dan transactions (1-to-1)
+    -   Jenis Relasi: One-to-one (1-to-1)
+    -   Tabel yang Berelasi: orders ↔ transactions
+    -   Penjelasan: Setiap order hanya terkait dengan satu transaksi (di mana uang akan dikirimkan ke instruktur setelah order selesai).
+        -   Kunci: order_id di tabel transactions mengacu pada id di tabel orders.
+
+6. Relasi antara users dan transactions (1-to-many)
+    -   Jenis Relasi: One-to-many (1-to-many)
+    -   Tabel yang Berelasi: users ↔ transactions
+    -   Penjelasan: Seorang instruktur bisa memiliki banyak transaksi (pembayaran) dari kursus yang dia ajarkan.
+        -   Kunci: instructor_id di tabel transactions mengacu pada id di tabel users.
+
+7. Relasi antara orders dan disputes (1-to-1)
+    -   Jenis Relasi: One-to-one (1-to-1)
+    -   Tabel yang Berelasi: orders ↔ disputes
+    -   Penjelasan: Setiap order hanya bisa memiliki satu dispute (komplain).
+        -   Kunci: order_id di tabel disputes mengacu pada id di tabel orders.
+
+8. Relasi antara disputes dan dispute_files (1-to-many)
+    -   Jenis Relasi: One-to-many (1-to-many)
+    -   Tabel yang Berelasi: disputes ↔ dispute_files
+    -   Penjelasan: Setiap dispute dapat memiliki banyak file bukti yang dilampirkan oleh student atau instruktur.
+        -   Kunci: dispute_id di tabel dispute_files mengacu pada id di tabel disputes.
