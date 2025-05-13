@@ -1,7 +1,7 @@
 <h3 align="center">OnCourse - Sistem Manajemen Kursus Online</h3>
 <br /><br /><br /><br /><br />
 <p align="center">
-    <img src="images/unsulbar-logo.png" width="250px">
+    <img src="resources/images/unsulbar-logo.png" width="250px">
 </p>
 <br /><br /><br /><br /><br /><br />
 <p align="center"><strong>Arhamullah Kamaruddin</strong><br />
