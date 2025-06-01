@@ -83,9 +83,9 @@
             <td>Email unik pengguna</td>
         </tr>
         <tr>
-            <del><td>email_verified_at</td></del>
-            <del><td>timestamp (nullable)</td></del>
-            <del><td>Tanggal verifikasi email</td></del>
+            <td><del>email_verified_at</del></td>
+            <td><del>timestamp (nullable)</del></td>
+            <td><del>Tanggal verifikasi email</del></td>
         </tr>
         <tr>
             <td>password</td>
@@ -98,9 +98,9 @@
             <td>Peran pengguna: admin, student, atau instructor</td>
         </tr>
         <tr>
-            <del><td>remember_token</td></del>
-            <del><td>string (nullable)</td></del>
-            <del><td>Token untuk sesi login "remember me"</td></del>
+            <td><del>remember_token</del></td>
+            <td><del>string (nullable)</del></td>
+            <td><del>Token untuk sesi login "remember me"</del></td>
         </tr>
         <tr>
             <td>created_at</td>
