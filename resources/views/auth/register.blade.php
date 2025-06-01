@@ -8,7 +8,7 @@
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" href="{{ asset('user-template') }}/assets/img/logo.png">
+    <link rel="shortcut icon" href="{{ asset('guest-template') }}/assets/img/logo.png">
 
     <!-- CSS here -->
     <link rel="stylesheet" href="guest-template/assets//css/bootstrap.min.css">
