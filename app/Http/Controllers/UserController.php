@@ -7,21 +7,6 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    function adminDashboard()
-    {
-        return view('user.dashboard');
-    }
-
-    function instructorDashboard()
-    {
-        return view('user.dashboard');
-    }
-
-    function studentDashboard()
-    {
-        return view('user.dashboard');
-    }
-
     public function index()
     {
 

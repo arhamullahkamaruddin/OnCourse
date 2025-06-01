@@ -39,7 +39,7 @@ Route::get('/account', [UserController::class, 'account'])->name('account');
 
 // Admin Routes Start
 Route::middleware('auth', 'admin')->group(function () {
-    Route::get('/admin/dashboard', [UserController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
     Route::get('/admin/disputes', [PageController::class, 'adminDisputes'])->name('admin.disputes');
     Route::get('/admin/manage-accounts', [PageController::class, 'adminManageAccounts'])->name('admin.manage-accounts');
     Route::get('/admin/manage-courses', [PageController::class, 'adminManageCourses'])->name('admin.manage-courses');
@@ -50,7 +50,7 @@ Route::middleware('auth', 'admin')->group(function () {
 
 // Instructor Routes Start
 Route::middleware('auth', 'instructor')->group(function () {
-    Route::get('/instructor/dashboard', [UserController::class, 'instructorDashboard'])->name('instructor.dashboard');
+    Route::get('/instructor/dashboard', [PageController::class, 'instructorDashboard'])->name('instructor.dashboard');
     Route::get('/instructor/disputes', [PageController::class, 'instructorDisputes'])->name('instructor.disputes');
     Route::get('/instructor/manage-lessons', [PageController::class, 'instructorManageLessons'])->name('instructor.manage-lessons');
     Route::get('/instructor/my-courses', [PageController::class, 'instructorMyCourses'])->name('instructor.my-courses');
@@ -61,7 +61,7 @@ Route::middleware('auth', 'instructor')->group(function () {
 
 // Student Routes Start
 Route::middleware('auth', 'student')->group(function () {
-    Route::get('/student/dashboard', [UserController::class, 'studentDashboard'])->name('student.dashboard');
+    Route::get('/student/dashboard', [PageController::class, 'studentDashboard'])->name('student.dashboard');
     Route::get('/student/disputes', [PageController::class, 'studentDisputes'])->name('student.disputes');
     Route::get('/student/my-courses', [PageController::class, 'studentMyCourses'])->name('student.my-courses');
     Route::get('/student/reviews', [PageController::class, 'studentReviews'])->name('student.reviews');

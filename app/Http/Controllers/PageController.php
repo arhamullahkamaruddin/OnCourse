@@ -7,6 +7,10 @@ use Illuminate\Http\Request;
 class PageController extends Controller
 {
     // Admin Pages
+    function adminDashboard()
+    {
+        return view('user.dashboard');
+    }
     function adminDisputes()
     {
         return view('user.admin.disputes');
@@ -29,6 +33,10 @@ class PageController extends Controller
     }
 
     // Instructor Pages
+    function instructorDashboard()
+    {
+        return view('user.dashboard');
+    }
     function instructorDisputes()
     {
         return view('user.instructor.disputes');
@@ -51,6 +59,10 @@ class PageController extends Controller
     }
 
     // Student Pages
+    function studentDashboard()
+    {
+        return view('user.dashboard');
+    }
     function studentDisputes()
     {
         return view('user.student.disputes');
