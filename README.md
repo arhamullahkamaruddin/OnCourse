@@ -58,84 +58,345 @@
 <h2>Struktur Tabel Database</h2>
 
 <h3>Tabel: <code>users</code></h3>
-| Field                 | Tipe                      | Keterangan                                        |
-|------------------     |------------------------   |---------------------------------------------------|
-| id                    | bigint                    | ID unik pengguna                                  |
-| name                  | string                    | Nama lengkap pengguna                             |
-| email                 | string                    | Email unik pengguna                               |
-| ~~email_verified_at~~ | ~~timestamp (nullable)~~  | ~~Tanggal verifikasi email~~                      |
-| password              | string                    | Password terenkripsi pengguna                     |
-| role                  | enum                      | Peran pengguna: admin, student, atau instructor   |
-| ~~remember_token~~    | ~~string (nullable)~~     | ~~Token untuk sesi login "remember me"~~          |
-| created_at            | timestamp                 | Waktu pembuatan akun                              |
-| updated_at            | timestamp                 | Waktu pembaruan akun terakhir                     |
-
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Tipe</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>bigint</td>
+            <td>ID unik pengguna</td>
+        </tr>
+        <tr>
+            <td>name</td>
+            <td>string</td>
+            <td>Nama lengkap pengguna</td>
+        </tr>
+        <tr>
+            <td>email</td>
+            <td>string</td>
+            <td>Email unik pengguna</td>
+        </tr>
+        <tr>
+            <td><del>email_verified_at</del></td>
+            <td><del>timestamp (nullable)</del></td>
+            <td><del>Tanggal verifikasi email</del></td>
+        </tr>
+        <tr>
+            <td>password</td>
+            <td>string</td>
+            <td>Password terenkripsi pengguna</td>
+        </tr>
+        <tr>
+            <td>role</td>
+            <td>enum</td>
+            <td>Peran pengguna: admin, student, atau instructor</td>
+        </tr>
+        <tr>
+            <td><del>remember_token</del></td>
+            <td><del>string (nullable)</del></td>
+            <td><del>Token untuk sesi login "remember me"</del></td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>timestamp</td>
+            <td>Waktu pembuatan akun</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>timestamp</td>
+            <td>Waktu pembaruan akun terakhir</td>
+        </tr>
+    </tbody>
+</table>
 
 <h3>Tabel: <code>courses</code></h3>
-| Field         | Tipe             | Keterangan             |
-|---------------|------------------|------------------------|
-| id            | bigint           | ID unik kursus         |
-| instructor_id | foreignId        | Referensi ke users.id  |
-| title         | string           | Judul kursus           |
-| description   | text             | Deskripsi lengkap      |
-| price         | decimal(10,2)    | Harga kursus           |
-| created_at    | timestamp        | Tanggal buat kursus    |
-| updated_at    | timestamp        | Terakhir diubah        |
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Tipe</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>bigint</td>
+            <td>ID unik kursus</td>
+        </tr>
+        <tr>
+            <td>instructor_id</td>
+            <td>foreignId</td>
+            <td>Referensi ke users.id</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>string</td>
+            <td>Judul kursus</td>
+        </tr>
+        <tr>
+            <td>description</td>
+            <td>text</td>
+            <td>Deskripsi lengkap</td>
+        </tr>
+        <tr>
+            <td>price</td>
+            <td>decimal(10,2)</td>
+            <td>Harga kursus</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>timestamp</td>
+            <td>Tanggal buat kursus</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>timestamp</td>
+            <td>Terakhir diubah</td>
+        </tr>
+    </tbody>
+</table>
 
 <h3>Tabel: <code>lessons</code></h3>
-| Field       | Tipe              | Keterangan              |
-|-------------|-------------------|-------------------------|
-| id          | bigint            | ID unik materi          |
-| course_id   | foreignId         | Referensi ke courses.id |
-| title       | string            | Judul materi            |
-| content     | text (nullable)   | Konten teks atau HTML   |
-| file_url    | string (nullable) | URL file materi         |
-| created_at  | timestamp         | Tanggal buat            |
-| updated_at  | timestamp         | Terakhir diubah         |
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Tipe</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>bigint</td>
+            <td>ID unik materi</td>
+        </tr>
+        <tr>
+            <td>course_id</td>
+            <td>foreignId</td>
+            <td>Referensi ke courses.id</td>
+        </tr>
+        <tr>
+            <td>title</td>
+            <td>string</td>
+            <td>Judul materi</td>
+        </tr>
+        <tr>
+            <td>content</td>
+            <td>text (nullable)</td>
+            <td>Konten teks atau HTML</td>
+        </tr>
+        <tr>
+            <td>file_url</td>
+            <td>string (nullable)</td>
+            <td>URL file materi</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>timestamp</td>
+            <td>Tanggal buat</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>timestamp</td>
+            <td>Terakhir diubah</td>
+        </tr>
+    </tbody>
+</table>
 
 <h3>Tabel: <code>orders</code></h3>
-| Field      | Tipe             | Keterangan                                     |
-|------------|------------------|------------------------------------------------|
-| id         | bigint           | ID unik order                                  |
-| user_id    | foreignId        | Referensi ke student (users.id)                |
-| course_id  | foreignId        | Kursus yang dibeli                             |
-| amount     | decimal(10,2)    | Jumlah dibayar                                 |
-| status     | enum             | pending, paid, completed, disputed, refunded   |
-| created_at | timestamp        | Tanggal order                                  |
-| updated_at | timestamp        | Terakhir diubah                                |
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Tipe</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>bigint</td>
+            <td>ID unik order</td>
+        </tr>
+        <tr>
+            <td>user_id</td>
+            <td>foreignId</td>
+            <td>Referensi ke student (users.id)</td>
+        </tr>
+        <tr>
+            <td>course_id</td>
+            <td>foreignId</td>
+            <td>Kursus yang dibeli</td>
+        </tr>
+        <tr>
+            <td>amount</td>
+            <td>decimal(10,2)</td>
+            <td>Jumlah dibayar</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>enum</td>
+            <td>pending, paid, completed, disputed, refunded</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>timestamp</td>
+            <td>Tanggal order</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>timestamp</td>
+            <td>Terakhir diubah</td>
+        </tr>
+    </tbody>
+</table>
 
 <h3>Tabel: <code>transactions</code></h3>
-| Field         | Tipe                | Keterangan                          |
-|---------------|---------------------|-------------------------------------|
-| id            | bigint              | ID transaksi                        |
-| order_id      | foreignId           | Referensi ke orders.id              |
-| instructor_id | foreignId           | Instruktur penerima                 |
-| amount        | decimal(10,2)       | Jumlah dibayarkan                   |
-| status        | enum                | pending, released, held, refunded   |
-| released_at   | timestamp (nullable)| Tanggal pencairan                   |
-| created_at    | timestamp           | Dibuat                              |
-| updated_at    | timestamp           | Diubah                              |
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Tipe</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>bigint</td>
+            <td>ID transaksi</td>
+        </tr>
+        <tr>
+            <td>order_id</td>
+            <td>foreignId</td>
+            <td>Referensi ke orders.id</td>
+        </tr>
+        <tr>
+            <td>instructor_id</td>
+            <td>foreignId</td>
+            <td>Instruktur penerima</td>
+        </tr>
+        <tr>
+            <td>amount</td>
+            <td>decimal(10,2)</td>
+            <td>Jumlah dibayarkan</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>enum</td>
+            <td>pending, released, held, refunded</td>
+        </tr>
+        <tr>
+            <td>released_at</td>
+            <td>timestamp (nullable)</td>
+            <td>Tanggal pencairan</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>timestamp</td>
+            <td>Dibuat</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>timestamp</td>
+            <td>Diubah</td>
+        </tr>
+    </tbody>
+</table>
 
 <h3>Tabel: <code>disputes</code></h3>
-| Field      | Tipe      | Keterangan                           |
-|------------|-----------|--------------------------------------|
-| id         | bigint    | ID komplain                          |
-| order_id   | foreignId | Order terkait                        |
-| user_id    | foreignId | Pengaju komplain (student)           |
-| reason     | text      | Alasan komplain                      |
-| status     | enum      | open, reviewing, resolved, rejected  |
-| created_at | timestamp | Dibuat                               |
-| updated_at | timestamp | Diubah                               |
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Tipe</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>bigint</td>
+            <td>ID komplain</td>
+        </tr>
+        <tr>
+            <td>order_id</td>
+            <td>foreignId</td>
+            <td>Order terkait</td>
+        </tr>
+        <tr>
+            <td>user_id</td>
+            <td>foreignId</td>
+            <td>Pengaju komplain (student)</td>
+        </tr>
+        <tr>
+            <td>reason</td>
+            <td>text</td>
+            <td>Alasan komplain</td>
+        </tr>
+        <tr>
+            <td>status</td>
+            <td>enum</td>
+            <td>open, reviewing, resolved, rejected</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>timestamp</td>
+            <td>Dibuat</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>timestamp</td>
+            <td>Diubah</td>
+        </tr>
+    </tbody>
+</table>
 
 <h3>Tabel: <code>dispute_files</code></h3>
-| Field      | Tipe      | Keterangan               |
-|------------|-----------|--------------------------|
-| id         | bigint    | ID file bukti            |
-| dispute_id | foreignId | Referensi ke disputes.id |
-| file_path  | string    | URL/path file bukti      |
-| created_at | timestamp | Diunggah                 |
-| updated_at | timestamp | Diperbarui               |
-
+<table>
+    <thead>
+        <tr>
+            <th>Field</th>
+            <th>Tipe</th>
+            <th>Keterangan</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>id</td>
+            <td>bigint</td>
+            <td>ID file bukti</td>
+        </tr>
+        <tr>
+            <td>dispute_id</td>
+            <td>foreignId</td>
+            <td>Referensi ke disputes.id</td>
+        </tr>
+        <tr>
+            <td>file_path</td>
+            <td>string</td>
+            <td>URL/path file bukti</td>
+        </tr>
+        <tr>
+            <td>created_at</td>
+            <td>timestamp</td>
+            <td>Diunggah</td>
+        </tr>
+        <tr>
+            <td>updated_at</td>
+            <td>timestamp</td>
+            <td>Diperbarui</td>
+        </tr>
+    </tbody>
+</table>
 
 <h2>Jenis Relasi dan Tabel yang Berelasi</h2>
 
