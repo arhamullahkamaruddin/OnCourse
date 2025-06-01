@@ -1,244 +1,91 @@
-<!doctype html>
-<html class="no-js" lang="zxx">
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
 
 <head>
-    <meta charset="utf-8">
-    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{{ asset('user-template') }}/image/logo.png">
     <title>OnCourse</title>
-    <meta name="description" content="">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="manifest" href="site.webmanifest">
-    <link rel="shortcut icon" href="{{ asset('user-template') }}/assets/img/logo.png">
-
-    <!-- CSS here -->
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/bootstrap.min.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/owl.carousel.min.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/slicknav.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/flaticon.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/progressbar_barfiller.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/gijgo.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/animate.min.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/animated-headline.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/magnific-popup.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/fontawesome-all.min.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/themify-icons.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/slick.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/nice-select.css">
-    <link rel="stylesheet" href="{{ asset('user-template') }}/assets/css/style.css">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('user-template') }}/css/style.css">
 </head>
 
 <body>
-    <!-- ? Preloader Start -->
-    <div id="preloader-active">
-        <div class="preloader d-flex align-items-center justify-content-center">
-            <div class="preloader-inner position-relative">
-                <div class="preloader-circle"></div>
-                <div class="preloader-img pere-text">
-                    <img src="{{ asset('user-template') }}/assets/img/logo/loder.png" alt="">
+    <div class="wrapper">
+        <!-- Sidebar -->
+        @include('user.layout.sidebar')
+
+        <div class="main">
+            <!-- Navbar -->
+            <nav class="navbar navbar-expand px-3 border-bottom">
+                <button class="btn" id="sidebar-toggle" type="button">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="navbar-collapse navbar">
+                    <ul class="navbar-nav">
+                        <li class="nav-item dropdown">
+                            <a href="#" data-bs-toggle="dropdown" class="nav-icon pe-md-0">
+                                <img src="{{ asset('user-template') }}/image/profil.jpg" alt="Profil"
+                                    class="avatar img-fluid rounded">
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-end">
+                                <a href="#" class="dropdown-item">Profile</a>
+                                <a href="#" class="dropdown-item">Setting</a>
+                                <form method="POST" action="{{ route('logout') }}">
+                                    @csrf
+                                    <button type="submit" class="dropdown-item">Logout</button>
+                                </form>
+                            </div>
+                        </li>
+                    </ul>
                 </div>
-            </div>
+            </nav>
+
+            <!-- Main content -->
+            @yield('content')
+
+            <!-- Theme toggle -->
+            <a href="#" class="theme-toggle">
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAABxklEQVRIS9WVzytFQRTH3wtZWEmUUhJZW8sGC9lZKH8ARVKKIr9CfpfYYOHH3kIpKyk/NtbWwkoUIVlYUPh8a+7rmnfvm/tu3sKpTzN35sw5c2bOnJtM5FiSObafyMaBdL/MhiKvi6yI4T91MIHBDXi2jvDbRJFnjZfw3QNz9pEHRTCG0ixcQSPcOe6pgvlTqIERWPTrBzmoROEYqmEQVhwOhphfgmtogluXA82XQRfMG+V22l4TkYZOYA32zfwo7TY82puJcsnLJpKgQKYZnMoUoctBB4t3jYEZWl28pA90V5IWOApz4nJwwcI6GIBVy4iXDDIuJ4Hid6AUlOgxeWn4ST8fiuHVslDO9z28gNJUkmbDc+B/RFL0xj/oF4Q4UCI8wDsUmTXeS0/ZcB3ROZr10A2bVgTKqnU4A72XQHE5aGOVUvEN9Ij2oBA0vmB23kp7GNeB1mVK03Hm08qD31lYBDrfTrNL6euh9UODWXxAuwNqJcqoLYj00FQqVFuqIEqpGEZP9ecGdBfOUuHl9yXKzRCl2Kl21YJKhu4mJWFHNImGMuTJr0w/rFyXMqdMUxX+Ja4ssjfzf/5odqSxv7M5olhOfgA4ZVEZ/9UCGgAAAABJRU5ErkJggg=="
+                    class="sun" />
+                <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABMAAAATCAYAAAByUDbMAAABvElEQVQ4T62UTSgEYRiAjfxFaEs52mJTCm2hbI5KOPiJLVlHR397duWGHHaVlJOQXBQH4kS4kMO2pLRXkotQpPG828z2GfOzW7aeZub9eb73m5kdLe8ff5qbS9f1cvIBTdOuslnTVobET/M8DEIxVCN88hL+kSESwTrIVG9QJkJkXznJEHXTsA/P0GVM14qoyksk+cxkiGSClLGtdgQJYttch43JPr2EqixK8QJEES1JI7IZDosQInaei0yKg+Cj8cOQ1XO8hS1iI1nJmEAmlG2c0CT3KvMjJ/ewB3rJHbgJ09ukwcfhBdZoGLfIari+gBIYIn/sJDRlUihb26A4Yi1msQAxmaoO4hCDJLWk0g8uyPmp+gBSBF8JNtqtTFMF8VmYgiKbmk5VtkzBJDQgTDptBWkluT4IQS10QAH4VZls5Q72kPU7ydQ44jauL2GHnvCvvxNJeb+mYQUmKPh2mbCJ3CHIPWum9sEqk3txBi3GimMU3VumyedaXvA5KIRhanalxu6PXkp8FUZBhwTcwCPISy0LyUdAviIRREfmYo7fM7YsTfLkBoytmD3XnGxCDNG7OrXrx1EtzOb8B/9fmmx7y2YiAAAAAElFTkSuQmCC"
+                    class="moon" />
+            </a>
+            <!-- Footer -->
+            <footer class="footer">
+                <div class="container-fluid">
+                    <div class="row text-muted">
+                        <div class="col-6 text-start">
+                            <p class="mb-0">
+                                <a href="#" class="text-muted">
+                                    <strong>Black</strong>
+                                </a>
+                            </p>
+                        </div>
+                        <div class="col-6 text-end">
+                            <ul class="list-inline">
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-muted">Contact</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-muted">About Us</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-muted">Terms</a>
+                                </li>
+                                <li class="list-inline-item">
+                                    <a href="#" class="text-muted">Booking</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
     </div>
-    <!-- Preloader Start -->
-    <header>
-        <!-- Header Start -->
-        <div class="header-area header-transparent">
-            <div class="main-header ">
-                <div class="header-bottom  header-sticky">
-                    <div class="container-fluid">
-                        <div class="row align-items-center">
-                            <!-- Logo -->
-                            <div class="col-xl-2 col-lg-2">
-                                <div class="logo">
-                                    <a href="index.html"><img
-                                            src="{{ asset('user-template') }}/assets/img/logo/logo.png"
-                                            alt=""></a>
-                                </div>
-                            </div>
-                            <div class="col-xl-10 col-lg-10">
-                                <div class="menu-wrapper d-flex align-items-center justify-content-end">
-                                    <!-- Main-menu -->
-                                    <div class="main-menu d-none d-lg-block">
-                                        <!-- Navbar -->
-                                        <nav>
-                                            <ul id="navigation">
-                                                <li class="active"><a href="{{ route('home') }}">Home</a></li>
-                                                <li><a href="{{ route('course') }}">Courses</a></li>
-                                                <li><a href="{{ route('about') }}">About</a></li>
-                                                <li><a href="{{ route('contact') }}">Contact</a></li>
-                                                <li class="button-header margin-left "><a href="{{ route('login') }}"
-                                                        class="btn">Login</a></li>
-                                                <li class="button-header"><a href="{{ route('register') }}"
-                                                        class="btn btn3">Register</a></li>
-                                            </ul>
-                                        </nav>
-
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- Mobile Menu -->
-                            <div class="col-12">
-                                <div class="mobile_menu d-block d-lg-none"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!-- Header End -->
-    </header>
-    <main>
-        @yield('content')
-    </main>
-
-    <footer>
-        <div class="footer-wrappper footer-bg">
-            <!-- Footer Start-->
-            <div class="footer-area footer-padding">
-                <div class="container">
-                    <div class="row justify-content-between">
-                        <div class="col-xl-4 col-lg-5 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="single-footer-caption mb-30">
-                                    <!-- logo -->
-                                    <div class="footer-logo mb-25">
-                                        <a href="index.html"><img
-                                                src="{{ asset('user-template') }}/assets/img/logo/logo2_footer.png"
-                                                alt=""></a>
-                                    </div>
-                                    <div class="footer-tittle">
-                                        <div class="footer-pera">
-                                            <p>The automated process starts as soon as your clothes go into the machine.
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <!-- social -->
-                                    <div class="footer-social">
-                                        <a href="#"><i class="fab fa-twitter"></i></a>
-                                        <a href="https://bit.ly/sai4ull"><i class="fab fa-facebook-f"></i></a>
-                                        <a href="#"><i class="fab fa-pinterest-p"></i></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-5">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Our solutions</h4>
-                                    <ul>
-                                        <li><a href="#">Design & creatives</a></li>
-                                        <li><a href="#">Telecommunication</a></li>
-                                        <li><a href="#">Restaurant</a></li>
-                                        <li><a href="#">Programing</a></li>
-                                        <li><a href="#">Architecture</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-4 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Support</h4>
-                                    <ul>
-                                        <li><a href="#">Design & creatives</a></li>
-                                        <li><a href="#">Telecommunication</a></li>
-                                        <li><a href="#">Restaurant</a></li>
-                                        <li><a href="#">Programing</a></li>
-                                        <li><a href="#">Architecture</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-2 col-lg-3 col-md-4 col-sm-6">
-                            <div class="single-footer-caption mb-50">
-                                <div class="footer-tittle">
-                                    <h4>Company</h4>
-                                    <ul>
-                                        <li><a href="#">Design & creatives</a></li>
-                                        <li><a href="#">Telecommunication</a></li>
-                                        <li><a href="#">Restaurant</a></li>
-                                        <li><a href="#">Programing</a></li>
-                                        <li><a href="#">Architecture</a></li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <!-- footer-bottom area -->
-            <div class="footer-bottom-area">
-                <div class="container">
-                    <div class="footer-border">
-                        <div class="row d-flex align-items-center">
-                            <div class="col-xl-12 ">
-                                <div class="footer-copy-right text-center">
-                                    <p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                        Copyright &copy;
-                                        <script>
-                                            document.write(new Date().getFullYear());
-                                        </script> All rights reserved | This template is made with <i
-                                            class="fa fa-heart" aria-hidden="true"></i> by <a
-                                            href="https://colorlib.com" target="_blank">Colorlib</a>
-                                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-                                    </p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Scroll Up -->
-    <div id="back-top">
-        <a title="Go to Top" href="#"> <i class="fas fa-level-up-alt"></i></a>
-    </div>
-
-    <!-- JS here -->
-    <script src="{{ asset('user-template') }}/assets/js/vendor/modernizr-3.5.0.min.js"></script>
-    <!-- Jquery, Popper, Bootstrap -->
-    <script src="{{ asset('user-template') }}/assets/js/vendor/jquery-1.12.4.min.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/popper.min.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/bootstrap.min.js"></script>
-    <!-- Jquery Mobile Menu -->
-    <script src="{{ asset('user-template') }}/assets/js/jquery.slicknav.min.js"></script>
-
-    <!-- Jquery Slick , Owl-Carousel Plugins -->
-    <script src="{{ asset('user-template') }}/assets/js/owl.carousel.min.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/slick.min.js"></script>
-    <!-- One Page, Animated-HeadLin -->
-    <script src="{{ asset('user-template') }}/assets/js/wow.min.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/animated.headline.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/jquery.magnific-popup.js"></script>
-
-    <!-- Date Picker -->
-    <script src="{{ asset('user-template') }}/assets/js/gijgo.min.js"></script>
-    <!-- Nice-select, sticky -->
-    <script src="{{ asset('user-template') }}/assets/js/jquery.nice-select.min.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/jquery.sticky.js"></script>
-    <!-- Progress -->
-    <script src="{{ asset('user-template') }}/assets/js/jquery.barfiller.js"></script>
-
-    <!-- counter , waypoint,Hover Direction -->
-    <script src="{{ asset('user-template') }}/assets/js/jquery.counterup.min.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/waypoints.min.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/jquery.countdown.min.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/hover-direction-snake.min.js"></script>
-
-    <!-- contact js -->
-    <script src="{{ asset('user-template') }}/assets/js/contact.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/jquery.form.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/jquery.validate.min.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/mail-script.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/jquery.ajaxchimp.min.js"></script>
-
-    <!-- Jquery Plugins, main Jquery -->
-    <script src="{{ asset('user-template') }}/assets/js/plugins.js"></script>
-    <script src="{{ asset('user-template') }}/assets/js/main.js"></script>
-
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('user-template') }}/js/script.js"></script>
 
 </html>

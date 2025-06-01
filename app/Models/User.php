@@ -28,7 +28,7 @@ class User extends Authenticatable
         return $this->hasMany(Transaction::class, 'instructor_id');
     }
 
-        public function isAdmin()
+    public function isAdmin()
     {
         return $this->role === 'admin';
     }

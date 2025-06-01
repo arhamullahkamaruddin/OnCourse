@@ -1,4 +1,4 @@
-@extends('user.master')
+@extends('guest.master')
 
 @section('content')
     <!--? slider Area Start-->
