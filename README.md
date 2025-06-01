@@ -1,3 +1,4 @@
+<br /><br /><br /><br /><br />
 <h3 align="center">OnCourse - Sistem Manajemen Kursus Online</h3>
 <br /><br /><br /><br /><br />
 <p align="center">
@@ -82,9 +83,9 @@
             <td>Email unik pengguna</td>
         </tr>
         <tr>
-            <td>email_verified_at</td>
-            <td>timestamp (nullable)</td>
-            <td>Tanggal verifikasi email</td>
+            <del><td>email_verified_at</td></del>
+            <del><td>timestamp (nullable)</td></del>
+            <del><td>Tanggal verifikasi email</td></del>
         </tr>
         <tr>
             <td>password</td>
@@ -97,9 +98,9 @@
             <td>Peran pengguna: admin, student, atau instructor</td>
         </tr>
         <tr>
-            <td>remember_token</td>
-            <td>string (nullable)</td>
-            <td>Token untuk sesi login "remember me"</td>
+            <del><td>remember_token</td></del>
+            <del><td>string (nullable)</td></del>
+            <del><td>Token untuk sesi login "remember me"</td></del>
         </tr>
         <tr>
             <td>created_at</td>
