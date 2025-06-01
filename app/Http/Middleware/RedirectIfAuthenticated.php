@@ -23,7 +23,7 @@ class RedirectIfAuthenticated
             } elseif ($role === 'instructor') {
                 return redirect()->route('instructor.dashboard');
             } else {
-                return redirect()->route('user.dashboard');
+                return redirect()->route('student.dashboard');
             }
         }
 
