@@ -7,38 +7,56 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
+    // Admin
+    function adminDashboard()
     {
-
+        return view('user.dashboard');
     }
 
-    public function create()
+    // Instructor
+    function instructorDashboard()
     {
-
+        return view('user.dashboard');
     }
 
-    public function store(Request $request)
+    // Student
+    function studentDashboard()
     {
-
+        return view('user.dashboard');
     }
 
-    public function show(User $user)
+    function viewUser()
     {
-
+        $users = User::all();
+        return view('user.admin.manage-account', compact('users'));
     }
 
-    public function edit(User $user)
+    // Dalam controller admin
+    public function resetPassword(Request $request, $id)
     {
+        $users = User::findOrFail($id);
+        $users->password = bcrypt('12345678');
+        $users->save();
 
+        return redirect()->back()->with('success', 'Password berhasil direset!');
     }
 
-    public function update(Request $request, User $user)
+    function addUser(Request $request)
     {
-
+        $users = new User();
+        $users->name = $request->name;
+        $users->email = $request->email;
+        $users->password = bcrypt($request->password);
+        $users->role = $request->role;
+        $users->save();
+        return redirect()->route('admin.manage-account')->with('success', 'User berhasil dibuat!');;
     }
 
-    public function destroy(User $user)
+    public function deleteUser(Request $request)
     {
-
+        $users = User::findOrFail($request->id);
+        $users->delete();
+        return redirect()->route('admin.manage-account')->with('success', 'User berhasil dihapus!');
     }
+
 }

@@ -9,13 +9,26 @@ class Transaction extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['order_id', 'instructor_id', 'amount', 'status', 'released_at'];
+    protected $fillable = [
+        'order_id',
+        'student_name',
+        'payment_proof',
+        'status',
+    ];
 
-    public function order() {
+    public function order()
+    {
         return $this->belongsTo(Order::class);
     }
 
-    public function instructor() {
-        return $this->belongsTo(User::class, 'instructor_id');
+    public function course()
+    {
+        return $this->hasOneThrough(Course::class, Order::class, 'id', 'id', 'order_id', 'course_id');
     }
+
+    public function student()
+    {
+        return $this->hasOneThrough(User::class, Order::class, 'id', 'id', 'order_id', 'student_id');
+    }
+
 }

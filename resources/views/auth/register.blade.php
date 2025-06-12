@@ -61,20 +61,22 @@
                     <input type="text" name="name" placeholder="Nama Lengkap">
                 </div>
                 <div class="form-input">
-                    <label for="name">Email</label>
+                    <label for="email">Email</label>
                     <input type="email" name="email" placeholder="Email">
                 </div>
                 <div class="form-input">
-                    <label for="name">Password</label>
+                    <label for="password">Password</label>
                     <input type="password" name="password" placeholder="Password">
                 </div>
-                <div class="form-input">
+                <input type="hidden" name="role" value="student">
+                {{-- <div class="form-input">
                     <label for="role">Daftar Sebagai:</label>
+
                     <select name="role" id="role" class="form-select" required>
                         <option value="student">Siswa</option>
                         <option value="instructor">Instruktur</option>
                     </select>
-                </div>
+                </div> --}}
                 <div class="form-input pt-30">
                     <input type="submit" name="submit" value="Registrasi">
                 </div>

@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="{{ asset('user-template') }}/image/logo.png">
     <title>OnCourse</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ asset('user-template') }}/css/bootstrap.min.css">
     <link rel="stylesheet" href="{{ asset('user-template') }}/css/style.css">
 </head>
 
@@ -30,8 +30,6 @@
                                     class="avatar img-fluid rounded">
                             </a>
                             <div class="dropdown-menu dropdown-menu-end">
-                                <a href="#" class="dropdown-item">Profile</a>
-                                <a href="#" class="dropdown-item">Setting</a>
                                 <form method="POST" action="{{ route('logout') }}">
                                     @csrf
                                     <button type="submit" class="dropdown-item">Logout</button>
@@ -85,7 +83,7 @@
         </div>
     </div>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script src="{{ asset('user-template') }}/js/bootstrap.bundle.min.js"></script>
 <script src="{{ asset('user-template') }}/js/script.js"></script>
 
 </html>

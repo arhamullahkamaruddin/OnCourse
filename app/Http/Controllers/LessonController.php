@@ -2,64 +2,33 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Lesson;
 use Illuminate\Http\Request;
 
 class LessonController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function store(Request $request, $id)
     {
-        //
-    }
+        $request->validate([
+            'title' => 'required|string|max:255',
+            'file' => 'required|file|mimes:pdf,mp4,avi,docx|max:10000',
+        ]);
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
+        $course = Course::findOrFail($id);
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
+        if ($course->instructor_id !== $request->user()->id) {
+            abort(403);
+        }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Lesson $lesson)
-    {
-        //
-    }
+        $file = $request->file('file')->store('lesson_files', 'public');
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Lesson $lesson)
-    {
-        //
-    }
+        Lesson::create([
+            'course_id' => $id,
+            'title' => $request->title,
+            'file' => $file,
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Lesson $lesson)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Lesson $lesson)
-    {
-        //
+        return redirect()->back()->with('success', 'Materi berhasil ditambahkan.');
     }
 }

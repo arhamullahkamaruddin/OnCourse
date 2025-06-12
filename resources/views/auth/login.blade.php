@@ -1,5 +1,6 @@
 <!doctype html>
 <html class="no-js" lang="zxx">
+
 <head>
     <meta charset="utf-8">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
@@ -9,22 +10,23 @@
     <link rel="manifest" href="site.webmanifest">
     <link rel="shortcut icon" href="{{ asset('guest-template') }}/assets/img/logo.png">
 
-	<!-- CSS here -->
-	<link rel="stylesheet" href="guest-template/assets//css/bootstrap.min.css">
-	<link rel="stylesheet" href="guest-template/assets//css/owl.carousel.min.css">
-	<link rel="stylesheet" href="guest-template/assets//css/slicknav.css">
+    <!-- CSS here -->
+    <link rel="stylesheet" href="guest-template/assets//css/bootstrap.min.css">
+    <link rel="stylesheet" href="guest-template/assets//css/owl.carousel.min.css">
+    <link rel="stylesheet" href="guest-template/assets//css/slicknav.css">
     <link rel="stylesheet" href="guest-template/assets//css/flaticon.css">
     <link rel="stylesheet" href="guest-template/assets//css/progressbar_barfiller.css">
     <link rel="stylesheet" href="guest-template/assets//css/gijgo.css">
     <link rel="stylesheet" href="guest-template/assets//css/animate.min.css">
     <link rel="stylesheet" href="guest-template/assets//css/animated-headline.css">
-	<link rel="stylesheet" href="guest-template/assets//css/magnific-popup.css">
-	<link rel="stylesheet" href="guest-template/assets//css/fontawesome-all.min.css">
-	<link rel="stylesheet" href="guest-template/assets//css/themify-icons.css">
-	<link rel="stylesheet" href="guest-template/assets//css/slick.css">
-	<link rel="stylesheet" href="guest-template/assets//css/nice-select.css">
-	<link rel="stylesheet" href="guest-template/assets//css/style.css">
+    <link rel="stylesheet" href="guest-template/assets//css/magnific-popup.css">
+    <link rel="stylesheet" href="guest-template/assets//css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="guest-template/assets//css/themify-icons.css">
+    <link rel="stylesheet" href="guest-template/assets//css/slick.css">
+    <link rel="stylesheet" href="guest-template/assets//css/nice-select.css">
+    <link rel="stylesheet" href="guest-template/assets//css/style.css">
 </head>
+
 <body>
     <!-- ? Preloader Start -->
     <div id="preloader-active">
@@ -46,15 +48,22 @@
         <!-- Login Admin -->
         <form class="form-default" action="{{ route('login.submit') }}" method="POST">
             @csrf
+
+
             <div class="login-form">
                 <!-- logo-login -->
                 <div class="logo-login">
                     <a href="{{ route('home') }}"><img src="guest-template/assets//img/logo/loder.png" alt=""></a>
                 </div>
                 <h2>Login Disini</h2>
+                @if (session('gagal'))
+                    <div class="alert alert-danger">
+                        {{ session('gagal') }}
+                    </div>
+                @endif
                 <div class="form-input">
                     <label for="name">Email</label>
-                    <input  type="email" name="email" placeholder="Email">
+                    <input type="email" name="email" placeholder="Email">
                 </div>
                 <div class="form-input">
                     <label for="name">Password</label>
@@ -116,5 +125,6 @@
     <script src="./guest-template/assets//js/plugins.js"></script>
     <script src="./guest-template/assets//js/main.js"></script>
 
-    </body>
+</body>
+
 </html>

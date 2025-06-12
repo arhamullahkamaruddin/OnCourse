@@ -13,21 +13,6 @@ class User extends Authenticatable
 
     protected $fillable = ['name', 'email', 'password', 'role'];
 
-    public function courses()
-    {
-        return $this->hasMany(Course::class, 'instructor_id');
-    }
-
-    public function orders()
-    {
-        return $this->hasMany(Order::class);
-    }
-
-    public function transactions()
-    {
-        return $this->hasMany(Transaction::class, 'instructor_id');
-    }
-
     public function isAdmin()
     {
         return $this->role === 'admin';
@@ -41,5 +26,30 @@ class User extends Authenticatable
     public function isStudent()
     {
         return $this->role === 'student';
+    }
+
+    public function courses()
+    {
+        return $this->hasMany(Course::class, 'instructor_id');
+    }
+
+    public function orders()
+    {
+        return $this->hasMany(Order::class, 'student_id');
+    }
+
+    public function purchasedCourses()
+    {
+        return $this->belongsToMany(Course::class, 'orders', 'student_id', 'course_id')
+            ->withPivot('id')
+            ->withTimestamps()
+            ->whereHas('orders.transaction', function ($query) {
+                $query->where('status', 'berhasil');
+            });
+    }
+
+    public function reviews()
+    {
+        return $this->hasMany(Review::class, 'student_id');
     }
 }

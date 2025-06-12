@@ -47,7 +47,7 @@ Struktur Tabel Database
     id	            bigint	        ID unik kursus
     instructor_id	foreignId	    Referensi ke users.id
     title	        string	        Judul kursus
-    description	    text	        Deskripsi lengkap
+    ###description	    text	        Deskripsi lengkap
     price	        decimal(10,2)	Harga kursus
     created_at	    timestamp	    Tanggal buat kursus
     updated_at	    timestamp	    Terakhir diubah

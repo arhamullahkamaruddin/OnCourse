@@ -11,10 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('dispute_files', function (Blueprint $table) {
+        Schema::create('transactions', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('dispute_id')->constrained('disputes');
-            $table->string('file_path');
+            $table->foreignId('order_id')->constrained('orders')->onDelete('cascade');
+            $table->string('student_name');
+            $table->string('payment_proof'); // simpan nama file bukti pembayaran
+            $table->enum('status', ['menunggu', 'berhasil', 'ditolak'])->default('menunggu');
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('dispute_files');
+        Schema::dropIfExists('transactions');
     }
 };

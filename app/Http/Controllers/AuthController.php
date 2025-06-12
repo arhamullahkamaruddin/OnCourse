@@ -22,7 +22,19 @@ class AuthController extends Controller
         $user->password = bcrypt($request->password);
         $user->role = $request->role;
         $user->save();
-        return redirect()->route('login');
+        // return redirect()->route('login');
+
+        Auth::login($user);
+
+        $role = $user->role;
+
+        if ($role === 'admin') {
+            return redirect()->route('admin.dashboard');
+        } elseif ($role === 'instructor') {
+            return redirect()->route('instructor.dashboard');
+        } else {
+            return redirect()->route('student.dashboard');
+        }
     }
 
     function login()

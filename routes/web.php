@@ -1,7 +1,11 @@
 <?php
 
 use App\Http\Controllers\AuthController;
-use App\Http\Controllers\PageController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\LessonController;
+use App\Http\Controllers\OrderController;
+use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\TransactionController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -30,42 +34,51 @@ Route::middleware('guest')->group(function () {
 
     Route::get('/login', [AuthController::class, 'login'])->name('login');
     Route::post('/login/submit', [AuthController::class, 'submitLogin'])->name('login.submit');
+    // Authentication Routes End
 });
 
-Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
-
-Route::get('/account', [UserController::class, 'account'])->name('account');
-// Authentication Routes End
+Route::middleware(['auth'])->group(function () {
+    Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
+});
 
 // Admin Routes Start
 Route::middleware('auth', 'admin')->group(function () {
-    Route::get('/admin/dashboard', [PageController::class, 'adminDashboard'])->name('admin.dashboard');
-    Route::get('/admin/disputes', [PageController::class, 'adminDisputes'])->name('admin.disputes');
-    Route::get('/admin/manage-accounts', [PageController::class, 'adminManageAccounts'])->name('admin.manage-accounts');
-    Route::get('/admin/manage-courses', [PageController::class, 'adminManageCourses'])->name('admin.manage-courses');
-    Route::get('/admin/refunds', [PageController::class, 'adminRefunds'])->name('admin.refunds');
-    Route::get('/admin/transactions', [PageController::class, 'adminTransactions'])->name('admin.transactions');
+    Route::get('/admin/dashboard', [UserController::class, 'adminDashboard'])->name('admin.dashboard');
+    Route::get('/admin/view-manage-account', [UserController::class, 'viewUser'])->name('admin.manage-account');
+    Route::post('/admin/reset-password/{id}', [UserController::class, 'resetPassword'])->name('admin.reset-password');
+    Route::post('/admin/add-user', [UserController::class, 'addUser'])->name('admin.add-user');
+    Route::post('/admin/delete-user/{id}', [UserController::class, 'deleteUser'])->name('admin.delete-user');
+    Route::get('/admin/transactions', [TransactionController::class, 'index'])->name('admin.transactions');
+    Route::post('/admin/transactions/{id}/confirm', [TransactionController::class, 'confirm'])->name('admin.transactions.confirm');
+    Route::post('/admin/transactions/{id}/reject', [TransactionController::class, 'reject'])->name('admin.transactions.reject');
 });
 // Admin Routes End
 
 // Instructor Routes Start
 Route::middleware('auth', 'instructor')->group(function () {
-    Route::get('/instructor/dashboard', [PageController::class, 'instructorDashboard'])->name('instructor.dashboard');
-    Route::get('/instructor/disputes', [PageController::class, 'instructorDisputes'])->name('instructor.disputes');
-    Route::get('/instructor/manage-lessons', [PageController::class, 'instructorManageLessons'])->name('instructor.manage-lessons');
-    Route::get('/instructor/my-courses', [PageController::class, 'instructorMyCourses'])->name('instructor.my-courses');
-    Route::get('/instructor/my-students', [PageController::class, 'instructorMyStudents'])->name('instructor.my-students');
-    Route::get('/instructor/payments', [PageController::class, 'instructorPayments'])->name('instructor.payments');
+    Route::get('/instructor/dashboard', [UserController::class, 'instructorDashboard'])->name('instructor.dashboard');
+    Route::get('/instructor/my-course', [CourseController::class, 'viewCourse'])->name('instructor.my-course');
+    Route::get('/instructor/create-course', [CourseController::class, 'createCourse'])->name('instructor.create-course');
+    Route::post('/instructor/store-course', [CourseController::class, 'storeCourse'])->name('instructor.store-course');
+    Route::get('/instructor/view-course', [CourseController::class, 'viewCourse'])->name('instructor.view-course');
+    Route::match(['get', 'post'], '/instructor/edit-course/{id}', [CourseController::class, 'editCourse'])->name('instructor.edit-course');
+    Route::post('/instructor/delete-course/{id}', [CourseController::class, 'deleteCourse'])->name('instructor.delete-course');
+    Route::get('/instructor/course-detail{id}', [CourseController::class, 'courseDetail'])->name('instructor.course-detail');
+    Route::post('/instructor/courses/{id}', [LessonController::class, 'store'])->name('instructor.lessons.store');
+    Route::post('/instructor/course/{id}/lesson', [LessonController::class, 'store'])->name('instructor.lessons.store');
+    Route::get('/instructor/course/{id}/detail', [CourseController::class, 'courseDetail'])->name('instructor.review');
 });
 // Instructor Routes End
 
 // Student Routes Start
 Route::middleware('auth', 'student')->group(function () {
-    Route::get('/student/dashboard', [PageController::class, 'studentDashboard'])->name('student.dashboard');
-    Route::get('/student/disputes', [PageController::class, 'studentDisputes'])->name('student.disputes');
-    Route::get('/student/my-courses', [PageController::class, 'studentMyCourses'])->name('student.my-courses');
-    Route::get('/student/reviews', [PageController::class, 'studentReviews'])->name('student.reviews');
-    Route::get('/student/search-courses', [PageController::class, 'studentSearchCourses'])->name('student.search-courses');
-    Route::get('/student/transactions', [PageController::class, 'studentTransactions'])->name('student.transactions');
+    Route::get('/student/dashboard', [UserController::class, 'studentDashboard'])->name('student.dashboard');
+    Route::get('/student/search-course', [CourseController::class, 'viewAllCourse'])->name('student.search-course');
+    Route::get('/student/buy-course/{id}', [OrderController::class, 'create'])->name('student.buy-course');
+    Route::post('/student/buy-course', [OrderController::class, 'store'])->name('student.buy-course.store');
+    Route::get('/student/my-courses', [CourseController::class, 'studentCourses'])->name('student.my-course');
+    Route::get('/student/my-transactions', [TransactionController::class, 'myTransactions'])->name('student.transactions');
+    Route::get('/student/course-detail/{id}', [CourseController::class, 'detailCourse'])->name('student.course-detail');
+    Route::post('/student/course-review/{id}', [CourseController::class, 'submitReview'])->name('student.review');
 });
 // Student Routes End

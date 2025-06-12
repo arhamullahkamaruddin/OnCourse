@@ -2,64 +2,41 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Course;
 use App\Models\Order;
+use App\Models\Transaction;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class OrderController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function create($id)
     {
-        //
+        $course = Course::findOrFail($id);
+        return view('user.student.buy-course', compact('course'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
-    }
+        $request->validate([
+            'course_id' => 'required|exists:courses,id',
+            'payment_proof' => 'required|image|mimes:jpg,jpeg,png|max:2048',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Order $order)
-    {
-        //
-    }
+        $image = $request->file('payment_proof')->store('payment_proof', 'public');
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Order $order)
-    {
-        //
-    }
+        $order = Order::create([
+            'course_id' => $request->course_id,
+            'student_id' => Auth::id(),
+        ]);
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Order $order)
-    {
-        //
-    }
+        Transaction::create([
+            'order_id' => $order->id,
+            'student_name' => Auth::user()->name,
+            'status' => 'menunggu',
+            'payment_proof' => $image,
+        ]);
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Order $order)
-    {
-        //
+        return redirect()->route('student.transactions')->with('success', 'Pembelian berhasil, menunggu konfirmasi admin.');
     }
 }
