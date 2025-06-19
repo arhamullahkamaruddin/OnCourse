@@ -375,6 +375,7 @@
     </tbody>
 </table>
 
+<del>
 <h3>Tabel: <code>disputes</code></h3>
 <table>
     <thead>
@@ -391,24 +392,24 @@
             <td>ID komplain</td>
         </tr>
         <tr>
-            <td><del>order_id</del></td>
-            <td><del>foreignId</del></td>
-            <td><del>Order terkait</del></td>
+            <td>order_id</td>
+            <td>foreignId</td>
+            <td>Order terkait</td>
         </tr>
         <tr>
-            <td><del>user_id</del></td>
-            <td><del>foreignId</del></td>
-            <td><del>Pengaju komplain (student)</del></td>
+            <td>user_id</td>
+            <td>foreignId</td>
+            <td>Pengaju komplain (student)</td>
         </tr>
         <tr>
-            <td><del>reason</del></td>
-            <td><del>text</del></td>
-            <td><del>Alasan komplain</del></td>
+            <td>reason</td>
+            <td>text</td>
+            <td>Alasan komplain</td>
         </tr>
         <tr>
-            <td><del>status</del></td>
-            <td><del>enum</del></td>
-            <td><del>open, reviewing, resolved, rejected</del></td>
+            <td>status</td>
+            <td>enum</td>
+            <td>open, reviewing, resolved, rejected</td>
         </tr>
         <tr>
             <td>created_at</td>
@@ -439,14 +440,14 @@
             <td>ID file bukti</td>
         </tr>
         <tr>
-            <td><del>dispute_id</del></td>
-            <td><del>foreignId</del></td>
-            <td><del>Referensi ke disputes.id</del></td>
+            <td>dispute_id</td>
+            <td>foreignId</td>
+            <td>Referensi ke disputes.id</td>
         </tr>
         <tr>
-            <td><del>file_path</del></td>
-            <td><del>string</del></td>
-            <td><del>URL/path file bukti</del></td>
+            <td>file_path</td>
+            <td>string</td>
+            <td>URL/path file bukti</td>
         </tr>
         <tr>
             <td>created_at</td>
@@ -460,6 +461,7 @@
         </tr>
     </tbody>
 </table>
+</del>
 
 <h2>Jenis Relasi dan Tabel yang Berelasi</h2>
 
